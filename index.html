@@ -368,9 +368,431 @@
       justify-content: center;
     }
 
-    /* Block 2 — Hero */
+    /* ===== BLOCK 2 — HERO ===== */
     .section-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
       background: var(--bg-primary);
+    }
+
+    /* Layer 1 — Background image */
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      transform: scale(1.04);
+      animation: heroZoom 2s var(--ease-out) forwards;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    @keyframes heroZoom {
+      to { transform: scale(1); }
+    }
+
+    /* Layer 2 — Bottom gradient */
+    .hero__gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, transparent 45%);
+      pointer-events: none;
+    }
+
+    /* Layer 3 — Title */
+    .hero__title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(80px, 14vw, 200px);
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+      opacity: 0;
+      animation: heroTitle 1.4s ease-out 0.2s forwards;
+    }
+
+    @keyframes heroTitle {
+      from {
+        opacity: 0;
+        letter-spacing: 0.04em;
+      }
+      to {
+        opacity: 1;
+        letter-spacing: -0.01em;
+      }
+    }
+
+    /* Layer 4 — Bottom content */
+    .hero__bottom {
+      position: absolute;
+      bottom: 48px;
+      left: 60px;
+      right: 60px;
+      z-index: 4;
+    }
+
+    /* Left bottom */
+    .hero__left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s var(--ease-out) 0.6s forwards;
+    }
+
+    .hero__slogan {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      max-width: 320px;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Center bottom — scroll button */
+    .hero__scroll {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      opacity: 0;
+      animation: fadeIn 0.8s var(--ease-out) 0.8s forwards;
+    }
+
+    .hero__scroll:hover {
+      border-color: var(--accent-gold);
+    }
+
+    .hero__scroll svg {
+      width: 16px;
+      height: 16px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: scrollPulse 1.8s ease-in-out infinite;
+      transition: stroke 0.3s;
+    }
+
+    .hero__scroll:hover svg {
+      stroke: var(--accent-gold);
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Right bottom — featured card */
+    .hero__card {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(22,22,20,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-gold);
+      padding: 24px 28px;
+      width: 280px;
+      opacity: 0;
+      transform: translateX(30px);
+      animation: slideInRight 0.9s var(--ease-out) 1.0s forwards;
+    }
+
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero__card-top {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .hero__card-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .hero__card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero__card-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .hero__card-name {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .hero__card-price {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--accent-gold);
+    }
+
+    .hero__card-link {
+      display: block;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-gold);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      transition: color 0.25s;
+    }
+
+    .hero__card-link:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Hero mobile */
+    @media (max-width: 768px) {
+      .hero__bottom {
+        left: 24px;
+        right: 24px;
+        bottom: 32px;
+      }
+
+      .hero__card {
+        display: none;
+      }
+
+      .hero__scroll {
+        display: none;
+      }
+
+      .hero__title {
+        font-size: clamp(48px, 14vw, 96px);
+      }
+    }
+
+    /* ===== BLOCK 3 — CATEGORIES ===== */
+    .section-categories {
+      background: var(--bg-secondary);
+      min-height: auto;
+      display: block;
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .categories__header {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px 80px 48px;
+    }
+
+    .categories__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
+    .categories__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: var(--text-h2);
+      color: var(--text-primary);
+    }
+
+    .categories__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+    }
+
+    /* Card */
+    .cat-card {
+      cursor: pointer;
+      border-right: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    .cat-card:last-child {
+      border-right: none;
+    }
+
+    /* Top zone — text */
+    .cat-card__text {
+      background: var(--bg-surface);
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.4s;
+    }
+
+    .cat-card:hover .cat-card__text {
+      background: var(--bg-card);
+    }
+
+    .cat-card__line {
+      width: 1px;
+      height: 32px;
+      background: var(--accent-gold-dim);
+      transition: height 0.4s var(--ease-out);
+    }
+
+    .cat-card:hover .cat-card__line {
+      height: 48px;
+    }
+
+    .cat-card__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .cat-card__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(32px, 3.5vw, 48px);
+      color: var(--text-primary);
+      text-align: center;
+      transition: color 0.3s;
+    }
+
+    .cat-card:hover .cat-card__title {
+      color: var(--accent-gold);
+    }
+
+    .cat-card__count {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    /* Bottom zone — image */
+    .cat-card__image {
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .cat-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .cat-card:hover .cat-card__image img {
+      transform: scale(1.05);
+    }
+
+    /* Categories responsive */
+    @media (max-width: 1024px) {
+      .categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cat-card:nth-child(2) {
+        border-right: none;
+      }
+
+      .cat-card:nth-child(3),
+      .cat-card:nth-child(4) {
+        border-top: 1px solid var(--border-subtle);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .categories__header {
+        padding: 60px 24px 36px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .categories__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cat-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .cat-card:last-child {
+        border-bottom: none;
+      }
+
+      .cat-card:nth-child(3),
+      .cat-card:nth-child(4) {
+        border-top: none;
+      }
     }
 
     /* Block 3 — About / USP */
@@ -482,9 +904,96 @@
   </div>
 
   <!-- BLOCK 2 — Hero -->
-  <section class="section-hero" id="hero"></section>
+  <section class="section-hero" id="hero">
+    <!-- Layer 1 — Background -->
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80" alt="Современная архитектура">
+    </div>
+    <!-- Layer 2 — Gradient -->
+    <div class="hero__gradient"></div>
+    <!-- Layer 3 — Title -->
+    <h1 class="hero__title">PH.GENIE<span style="font-style:italic">R</span></h1>
+    <!-- Layer 4 — Bottom content -->
+    <div class="hero__bottom">
+      <!-- Left -->
+      <div class="hero__left">
+        <p class="hero__slogan">Жильё, достойное ваших эмоций</p>
+        <p class="hero__sub">Помогаем найти дом, который соответствует вашей жизни</p>
+      </div>
+      <!-- Center — scroll -->
+      <button class="hero__scroll" id="heroScroll" aria-label="Прокрутить вниз">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </button>
+      <!-- Right — featured card -->
+      <a href="#featured" class="hero__card">
+        <div class="hero__card-top">
+          <img class="hero__card-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=120&q=80" alt="Объект">
+          <div class="hero__card-info">
+            <span class="hero__card-label">FEATURED</span>
+            <span class="hero__card-name">Вилла на побережье</span>
+            <span class="hero__card-price">₽ 48 000 000</span>
+          </div>
+        </div>
+        <span class="hero__card-link">Смотреть объект →</span>
+      </a>
+    </div>
+  </section>
 
-  <!-- BLOCK 3 — About / USP -->
+  <!-- BLOCK 3 — Categories -->
+  <section class="section-categories" id="categories">
+    <div class="categories__header">
+      <p class="categories__label">Наши направления</p>
+      <h2 class="categories__title">Категории объектов</h2>
+    </div>
+    <div class="categories__grid">
+      <article class="cat-card reveal">
+        <div class="cat-card__text">
+          <span class="cat-card__line"></span>
+          <span class="cat-card__label">Город</span>
+          <h3 class="cat-card__title">Квартиры</h3>
+          <span class="cat-card__count">24 объекта</span>
+        </div>
+        <div class="cat-card__image">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Квартиры в городе">
+        </div>
+      </article>
+      <article class="cat-card reveal">
+        <div class="cat-card__text">
+          <span class="cat-card__line"></span>
+          <span class="cat-card__label">Море</span>
+          <h3 class="cat-card__title">Побережье</h3>
+          <span class="cat-card__count">12 объектов</span>
+        </div>
+        <div class="cat-card__image">
+          <img src="https://images.unsplash.com/photo-1499793983394-e58fc3f12856?w=600&q=80" alt="Побережье">
+        </div>
+      </article>
+      <article class="cat-card reveal">
+        <div class="cat-card__text">
+          <span class="cat-card__line"></span>
+          <span class="cat-card__label">Бизнес</span>
+          <h3 class="cat-card__title">Коммерческая</h3>
+          <span class="cat-card__count">8 объектов</span>
+        </div>
+        <div class="cat-card__image">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Коммерческая недвижимость">
+        </div>
+      </article>
+      <article class="cat-card reveal">
+        <div class="cat-card__text">
+          <span class="cat-card__line"></span>
+          <span class="cat-card__label">Природа</span>
+          <h3 class="cat-card__title">Загородная</h3>
+          <span class="cat-card__count">16 объектов</span>
+        </div>
+        <div class="cat-card__image">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Загородная недвижимость">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BLOCK 4 — About / USP -->
   <section class="section-about" id="about"></section>
 
   <!-- BLOCK 4 — Catalog -->
@@ -539,6 +1048,11 @@
         mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
       });
+    });
+
+    // Hero scroll button
+    document.getElementById('heroScroll').addEventListener('click', () => {
+      document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
     });
 
     // Reveal on scroll (IntersectionObserver)
