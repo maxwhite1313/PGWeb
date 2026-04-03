@@ -1081,18 +1081,25 @@
       padding: 0 80px;
     }
 
+    .why__header {
+      margin-bottom: 48px;
+    }
+
+    .why__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
     .why__title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(40px, 5vw, 64px);
+      font-size: var(--text-h2);
       color: var(--text-primary);
-    }
-
-    .why__title-line {
-      width: 60px;
-      height: 1px;
-      background: var(--border-gold);
-      margin: 24px 0 48px;
     }
 
     /* Comparison grid */
@@ -1475,8 +1482,10 @@
   <!-- BLOCK 6 — Why Us -->
   <section class="section-why" id="why">
     <div class="why__inner">
-      <h2 class="why__title reveal">Почему именно мы?</h2>
-      <div class="why__title-line"></div>
+      <div class="why__header">
+        <p class="why__label">Преимущества</p>
+        <h2 class="why__title">Почему именно мы?</h2>
+      </div>
 
       <div class="why__compare reveal">
         <!-- Left — self search -->
