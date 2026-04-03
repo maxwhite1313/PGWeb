@@ -1631,18 +1631,498 @@
       }
     }
 
-    /* Block 10 — Contact / CTA */
+    /* ===== BLOCK 9 — CONTACT + FORM ===== */
     .section-contact {
       background: var(--bg-primary);
+      min-height: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 100px 80px;
       border-top: 1px solid var(--border-gold);
     }
 
-    /* Block 11 — Footer */
-    .section-footer {
-      background: var(--bg-primary);
+    .contact__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .contact__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-top: 16px;
+    }
+
+    .contact__title i {
+      font-style: italic;
+    }
+
+    .contact__sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 20px;
+      max-width: 340px;
+    }
+
+    .contact__divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 36px 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--accent-gold);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .contact-item__main {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .contact-item__sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .contact-item__online {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: #5A8A5A;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-item__dot {
+      width: 6px;
+      height: 6px;
+      background: #5A8A5A;
+      border-radius: 50%;
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-top: 2px solid var(--accent-gold);
+      padding: 48px 44px;
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+
+    .form-subtitle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .form-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 24px 0;
+    }
+
+    .form-field {
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border-gold);
+      padding: 12px 0;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-bottom-color: var(--accent-gold);
+    }
+
+    .form-select {
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 36px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .submit-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease-out), background 0.3s;
+    }
+
+    .submit-circle svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--bg-primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .submit-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .form-submit:hover .submit-circle {
+      transform: translateX(6px);
+      background: var(--accent-gold-light);
+    }
+
+    .form-consent {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .section-contact {
+        grid-template-columns: 1fr;
+        padding: 80px 24px;
+        gap: 48px;
+      }
+
+      .contact-form {
+        padding: 32px 24px;
+      }
+    }
+
+    /* ===== BLOCK 10 — MAP ===== */
+    .section-map {
+      position: relative;
+      height: 420px;
       min-height: auto;
-      padding: 80px 0;
+      display: block;
       border-top: 1px solid var(--border-gold);
+    }
+
+    .map__iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(1) invert(0.92) contrast(0.85);
+    }
+
+    .map__card {
+      position: absolute;
+      top: 40px;
+      left: 80px;
+      background: var(--bg-card);
+      border-top: 2px solid var(--accent-gold);
+      padding: 32px;
+      z-index: 2;
+      max-width: 300px;
+    }
+
+    .map__card-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+    }
+
+    .map__card-address {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .map__card-phone {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-top: 12px;
+    }
+
+    .map__card-hours {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .map__card {
+        left: 24px;
+        top: 24px;
+        padding: 24px;
+      }
+    }
+
+    /* ===== BLOCK 11 — FOOTER ===== */
+    .site-footer {
+      background: var(--bg-secondary);
+      min-height: auto;
+      display: block;
+      padding: 60px 80px 40px;
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* Col 1 — brand */
+    .footer__brand-logo {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.06em;
+    }
+
+    .footer__brand-logo span {
+      font-style: italic;
+    }
+
+    .footer__brand-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 12px;
+      max-width: 240px;
+    }
+
+    .footer__socials {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .footer__social-link {
+      color: var(--text-muted);
+      transition: color 0.25s;
+    }
+
+    .footer__social-link:hover {
+      color: var(--accent-gold);
+    }
+
+    .footer__social-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Col 2-3 — nav */
+    .footer__nav-title {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
+    .footer__nav-link {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      transition: color 0.25s;
+    }
+
+    .footer__nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    /* Col 4 — contacts */
+    .footer__contact-phone {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .footer__contact-email {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .footer__contact-hours {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* Bottom bar */
+    .footer__divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 40px 0 24px;
+    }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .footer__copy {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    .footer__privacy {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      transition: color 0.25s;
+    }
+
+    .footer__privacy:hover {
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .footer__top {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-footer {
+        padding: 48px 24px 32px;
+      }
+
+      .footer__top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -1947,11 +2427,143 @@
     </div>
   </section>
 
-  <!-- BLOCK 10 — Contact / CTA -->
-  <section class="section-contact" id="contact"></section>
+  <!-- BLOCK 9 — Contact + Form -->
+  <section class="section-contact" id="contact">
+    <div class="contact__left reveal">
+      <p class="contact__label">Мы здесь, чтобы помочь</p>
+      <h2 class="contact__title">Обсудим ваш идеальный объект <i>вместе</i></h2>
+      <p class="contact__sub">Оставьте заявку — и мы свяжемся в течение 30 минут в рабочее время</p>
+      <div class="contact__divider"></div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <p class="contact-item__main">ivanov@phgenier.ru</p>
+          <p class="contact-item__sub">Напишите нам</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+          <p class="contact-item__main">+7 (906) 031-10-66</p>
+          <p class="contact-item__online"><span class="contact-item__dot"></span> Сейчас работаем</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div>
+          <p class="contact-item__main">Калининград, Московский пр-т 40</p>
+          <p class="contact-item__sub">Балтийский Бизнес Центр, 14 этаж</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <h3 class="form-title">Заявка на консультацию</h3>
+      <p class="form-subtitle">Ответим в течение 30 минут</p>
+      <div class="form-divider"></div>
+      <form id="contactForm">
+        <div class="form-field">
+          <label class="form-label">Имя</label>
+          <input type="text" class="form-input" placeholder="Как вас зовут?">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Телефон</label>
+          <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Тип объекта</label>
+          <select class="form-select">
+            <option value="" disabled selected>Выберите тип</option>
+            <option>Квартира</option>
+            <option>Дом</option>
+            <option>Коммерческая</option>
+            <option>Загородная</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Бюджет</label>
+          <input type="text" class="form-input" placeholder="Укажите бюджет">
+        </div>
+        <button type="submit" class="form-submit">
+          <span class="submit-circle">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+          <span class="submit-text">Получить консультацию</span>
+        </button>
+      </form>
+      <p class="form-consent">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+    </div>
+  </section>
+
+  <!-- BLOCK 10 — Map -->
+  <section class="section-map" id="map">
+    <iframe class="map__iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2304.8!2d20.4934!3d54.7104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTTCsDQyJzM3LjQiTiAyMMKwMjknMzYuMiJF!5e0!3m2!1sru!2sru!4v1" allowfullscreen loading="lazy"></iframe>
+    <div class="map__card">
+      <p class="map__card-logo">PH.GENIE<span style="font-style:italic">R</span></p>
+      <p class="map__card-address">Калининград, Московский пр-т 40<br>Балтийский Бизнес Центр, 14 этаж</p>
+      <p class="map__card-phone">+7 (906) 031-10-66</p>
+      <p class="map__card-hours">Пн–Пт 09:00–19:00 · Сб 10:00–16:00</p>
+    </div>
+  </section>
 
   <!-- BLOCK 11 — Footer -->
-  <section class="section-footer" id="footer"></section>
+  <footer class="site-footer" id="footer">
+    <div class="footer__top">
+      <div>
+        <p class="footer__brand-logo">PH.GENIE<span>R</span></p>
+        <p class="footer__brand-desc">Премиальное агентство недвижимости в Калининграде. Находим дом, который соответствует вашей жизни.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-link" aria-label="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.4c-.5.2-.5.6 0 .8l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5 3.7c.4.3 1 .1 1.1-.4L22.2 5.2c.2-.6-.4-1.1-1-.8zM9.6 14.2l-.4 3.8 7.5-6.9-7.1 3.1z"/></svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 21.5c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.6.9.9-3.5-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.5 6.7 2 12 2s9.8 4.5 9.8 10S17.3 22 12 22z"/></svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="VK">
+            <svg viewBox="0 0 24 24"><path d="M20.8 7.74c.15-.5 0-.86-.7-.86h-2.32c-.59 0-.86.31-1.01.66 0 0-1.18 2.88-2.85 4.75-.54.54-.79.71-1.08.71-.15 0-.37-.17-.37-.67V7.74c0-.59-.17-.86-.66-.86H8.35c-.37 0-.59.27-.59.53 0 .56.83.69.92 2.26v3.41c0 .75-.14.89-.43.89-.79 0-2.71-2.9-3.85-6.22C4.17 7.14 3.94 6.88 3.34 6.88H1.02c-.66 0-.79.31-.79.66 0 .61.79 3.66 3.66 7.69C5.81 18.34 8.58 19.5 11.1 19.5c1.52 0 1.71-.34 1.71-.93v-2.08c0-.66.14-.79.6-.79.34 0 .92.17 2.28 1.48 1.55 1.55 1.81 2.25 2.68 2.25h2.32c.66 0 .99-.34.8-.99-.21-.66-.96-1.61-1.96-2.74-.54-.64-1.35-1.33-1.6-1.67-.34-.44-.24-.64 0-1.03 0 0 2.83-3.98 3.12-5.33z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav>
+        <p class="footer__nav-title">Навигация</p>
+        <a href="#categories" class="footer__nav-link">Каталог</a>
+        <a href="#team" class="footer__nav-link">Команда</a>
+        <a href="#reviews" class="footer__nav-link">Отзывы</a>
+        <a href="#contact" class="footer__nav-link">Контакты</a>
+      </nav>
+
+      <nav>
+        <p class="footer__nav-title">Услуги</p>
+        <a href="#" class="footer__nav-link">Подбор недвижимости</a>
+        <a href="#" class="footer__nav-link">Инвестиции</a>
+        <a href="#" class="footer__nav-link">Юридическая проверка</a>
+        <a href="#" class="footer__nav-link">Консьерж-сервис</a>
+      </nav>
+
+      <div>
+        <a href="tel:+79060311066" class="footer__contact-phone">+7 (906) 031-10-66</a>
+        <p class="footer__contact-email">ivanov@phgenier.ru</p>
+        <p class="footer__contact-hours">Пн–Пт 09:00–19:00<br>Сб 10:00–16:00<br>Вс — выходной</p>
+      </div>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2024 PH.GENIER. Все права защищены.</p>
+      <a href="#" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
 
   <script>
     // Scroll behavior — nav background
