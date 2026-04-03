@@ -1018,33 +1018,9 @@
 
     /* ===== BLOCK 5 — CONCIERGE SERVICE ===== */
     .section-concierge {
-      background: var(--bg-surface);
+      background: var(--bg-primary);
       min-height: auto;
       display: block;
-      border-top: 1px solid var(--border-gold);
-    }
-
-    .concierge__header {
-      padding: 60px 80px 48px;
-      text-align: center;
-    }
-
-    .concierge__label {
-      font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 12px;
-    }
-
-    .concierge__subtitle {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: 22px;
-      color: var(--text-secondary);
     }
 
     /* Marquee */
@@ -1052,14 +1028,14 @@
       overflow: hidden;
       border-top: 1px solid var(--border-gold);
       border-bottom: 1px solid var(--border-gold);
-      padding: 20px 0;
+      padding: 28px 0;
     }
 
     .marquee-track {
       display: flex;
       align-items: center;
       width: max-content;
-      animation: marquee 28s linear infinite;
+      animation: marquee 35s linear infinite;
     }
 
     .marquee-wrapper:hover .marquee-track {
@@ -1072,26 +1048,22 @@
     }
 
     .marquee-item {
-      font-family: var(--font-body);
-      font-size: 14px;
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2vw, 26px);
       font-weight: 300;
-      letter-spacing: 0.08em;
+      font-style: italic;
+      letter-spacing: 0.03em;
       color: var(--text-primary);
       white-space: nowrap;
-      padding: 0 32px;
+      padding: 0 48px;
     }
 
     .marquee-dot {
       color: var(--accent-gold);
-      font-size: 18px;
+      font-size: 22px;
       line-height: 1;
       flex-shrink: 0;
-    }
-
-    @media (max-width: 768px) {
-      .concierge__header {
-        padding: 48px 24px 36px;
-      }
+      opacity: 0.7;
     }
 
     /* Block 8 — Geography */
@@ -1296,13 +1268,9 @@
 
   <!-- BLOCK 5 — Concierge Service -->
   <section class="section-concierge" id="services">
-    <div class="concierge__header">
-      <p class="concierge__label">Консьерж сервис</p>
-      <p class="concierge__subtitle">Окутаем вас заботой</p>
-    </div>
     <div class="marquee-wrapper">
       <div class="marquee-track" id="marqueeTrack">
-        <!-- Rendered by JS — text items with dot separators, duplicated for seamless loop -->
+        <!-- Rendered by JS -->
       </div>
     </div>
   </section>
