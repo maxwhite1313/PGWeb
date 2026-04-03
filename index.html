@@ -807,7 +807,7 @@
 
     .team__section-title {
       font-family: var(--font-display);
-      font-weight: 400;
+      font-weight: 300;
       font-size: var(--text-h1);
       color: var(--text-primary);
       text-transform: uppercase;
@@ -818,7 +818,7 @@
     .team__layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 60px;
       align-items: start;
     }
 
@@ -834,6 +834,7 @@
       background: var(--bg-card);
       overflow: hidden;
       position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
     }
 
     .team__main-photo {
@@ -866,19 +867,26 @@
     }
 
     .team__name {
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: clamp(22px, 2.5vw, 28px);
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(32px, 3.5vw, 48px);
       color: var(--text-primary);
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
     .team__role {
       font-family: var(--font-body);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
       color: var(--text-secondary);
-      margin-top: 6px;
+      margin-top: 8px;
+    }
+
+    .team__divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent-gold-dim);
+      margin: 24px 0;
     }
 
     .team__desc {
@@ -887,7 +895,6 @@
       font-size: 15px;
       line-height: 1.8;
       color: var(--text-secondary);
-      margin-top: 24px;
       max-width: 480px;
     }
 
@@ -903,18 +910,18 @@
     }
 
     .team__phone svg {
-      width: 16px;
-      height: 16px;
-      stroke: var(--text-secondary);
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent-gold);
       fill: none;
-      stroke-width: 1.5;
+      stroke-width: 2;
     }
 
     /* Thumbnails grid */
     .team__thumbs {
       display: flex;
       gap: 16px;
-      margin-top: 40px;
+      margin-top: 48px;
     }
 
     .team__thumb-card {
@@ -925,7 +932,7 @@
     }
 
     .team__thumb-card:hover {
-      opacity: 0.85;
+      opacity: 0.8;
     }
 
     .team__thumb-img {
@@ -934,22 +941,27 @@
       object-fit: cover;
       object-position: top center;
       display: block;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .team__thumb-card:hover .team__thumb-img {
+      border-color: var(--border-gold);
     }
 
     .team__thumb-name {
-      font-family: var(--font-body);
-      font-size: 13px;
+      font-family: var(--font-display);
+      font-size: 16px;
       font-weight: 400;
       color: var(--text-primary);
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .team__thumb-role {
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 300;
-      color: var(--text-secondary);
-      margin-top: 2px;
+      color: var(--text-muted);
+      margin-top: 3px;
       line-height: 1.4;
     }
 
@@ -1277,6 +1289,7 @@
         <div class="team__info-col" id="teamInfo">
           <h3 class="team__name" id="teamName">Антон Иванов</h3>
           <p class="team__role" id="teamRole">Брокер, 10 лет в недвижимости</p>
+          <div class="team__divider"></div>
           <p class="team__desc" id="teamDesc">Большой опыт на рынке недвижимости глубоко понимаю все тонкости сделок. Помогаю клиентам найти, продать или купить недвижимость.</p>
           <div class="team__phone">
             <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
