@@ -123,7 +123,7 @@
       right: 0;
       z-index: 100;
       height: 64px;
-      padding: 0 60px;
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -154,23 +154,35 @@
       font-style: italic;
     }
 
-    /* Menu */
+    /* Pill menu */
     .nav__menu {
       display: flex;
       align-items: center;
-      gap: 36px;
+      gap: 4px;
+      background: rgba(240, 237, 232, 0.06);
+      border: 1px solid rgba(240, 237, 232, 0.08);
+      border-radius: 100px;
+      padding: 4px;
     }
 
     .nav__menu a {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 300;
       letter-spacing: 0.04em;
       color: var(--text-secondary);
-      transition: color 0.25s;
+      padding: 8px 20px;
+      border-radius: 100px;
+      transition: color 0.25s, background 0.25s;
+      white-space: nowrap;
     }
 
     .nav__menu a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav__menu a.active {
+      background: rgba(200, 169, 126, 0.15);
       color: var(--text-primary);
     }
 
@@ -178,100 +190,69 @@
     .nav__right {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
       flex-shrink: 0;
+    }
+
+    /* Social icons */
+    .nav__socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav__social {
+      color: var(--text-muted);
+      transition: color 0.25s;
+      display: flex;
+    }
+
+    .nav__social:hover {
+      color: var(--accent-gold);
+    }
+
+    .nav__social svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
     }
 
     /* Divider */
     .nav__divider {
       width: 1px;
-      height: 36px;
+      height: 24px;
       background: var(--border-subtle);
-      align-self: center;
     }
 
-    /* Contacts */
-    .nav__contacts {
+    /* Phone */
+    .nav__phone-link {
       display: flex;
       align-items: center;
-      gap: 20px;
-    }
-
-    .nav__phone-block {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .nav__phone {
+      gap: 8px;
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 400;
       color: var(--text-primary);
       white-space: nowrap;
     }
 
-    .nav__status {
+    .nav__phone-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent-gold);
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 1px;
-    }
-
-    .nav__status-dot {
-      width: 6px;
-      height: 6px;
-      background: #5A8A5A;
-      border-radius: 50%;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .nav__status-text {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 300;
-      color: #5A8A5A;
-      white-space: nowrap;
-    }
-
-    .nav__address-block {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-
-    .nav__address-icon {
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .nav__address-icon svg {
+    .nav__phone-icon svg {
       width: 12px;
       height: 12px;
+      stroke: var(--bg-primary);
       fill: none;
-      stroke: var(--text-secondary);
-      stroke-width: 1.5;
-    }
-
-    .nav__address-lines {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .nav__address-line1 {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      white-space: nowrap;
-    }
-
-    .nav__address-line2 {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--text-muted);
-      white-space: nowrap;
+      stroke-width: 2;
     }
 
     /* Hamburger */
@@ -346,12 +327,13 @@
     /* Mobile nav */
     @media (max-width: 768px) {
       .nav {
-        padding: 0 24px;
+        padding: 0 20px;
       }
 
       .nav__menu,
+      .nav__socials,
       .nav__divider,
-      .nav__contacts {
+      .nav__phone-link {
         display: none;
       }
 
@@ -2146,32 +2128,32 @@
     <a href="#" class="nav__logo">PH.GENIE<span class="nav__logo-r">R</span></a>
 
     <div class="nav__menu">
-      <a href="#catalog">Каталог</a>
+      <a href="#hero" class="active">Главная</a>
       <a href="#team">Команда</a>
-      <a href="#featured">Объекты</a>
+      <a href="#categories">Каталог</a>
+      <a href="#reviews">Отзывы</a>
       <a href="#contact">Контакты</a>
     </div>
 
     <div class="nav__right">
-      <div class="nav__divider"></div>
-      <div class="nav__contacts">
-        <div class="nav__phone-block">
-          <a href="tel:+79060311066" class="nav__phone">+7 (906) 031-10-66</a>
-          <div class="nav__status">
-            <span class="nav__status-dot"></span>
-            <span class="nav__status-text">Сейчас работаем</span>
-          </div>
-        </div>
-        <div class="nav__address-block">
-          <span class="nav__address-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          </span>
-          <div class="nav__address-lines">
-            <span class="nav__address-line1">Калининград, Московский пр-т 40</span>
-            <span class="nav__address-line2">Балтийский Бизнес Центр 14 этаж</span>
-          </div>
-        </div>
+      <div class="nav__socials">
+        <a href="#" class="nav__social" aria-label="Telegram">
+          <svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.4c-.5.2-.5.6 0 .8l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5 3.7c.4.3 1 .1 1.1-.4L22.2 5.2c.2-.6-.4-1.1-1-.8zM9.6 14.2l-.4 3.8 7.5-6.9-7.1 3.1z"/></svg>
+        </a>
+        <a href="#" class="nav__social" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+        </a>
+        <a href="#" class="nav__social" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 21.5c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.6.9.9-3.5-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.5 6.7 2 12 2s9.8 4.5 9.8 10S17.3 22 12 22z"/></svg>
+        </a>
       </div>
+      <div class="nav__divider"></div>
+      <a href="tel:+79060311066" class="nav__phone-link">
+        <span class="nav__phone-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </span>
+        +7 (906) 031-10-66
+      </a>
     </div>
 
     <button class="nav__hamburger" id="hamburger" aria-label="Открыть меню">
@@ -2579,14 +2561,31 @@
   </footer>
 
   <script>
-    // Scroll behavior — nav background
+    // Scroll behavior — nav background + active menu item
     const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav__menu a');
+    const sections = Array.from(navLinks).map(link => {
+      const id = link.getAttribute('href').slice(1);
+      return document.getElementById(id);
+    }).filter(Boolean);
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > 60) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
       }
+
+      // Active section tracking
+      let currentId = 'hero';
+      sections.forEach(sec => {
+        if (sec.offsetTop - 120 <= window.scrollY) {
+          currentId = sec.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
     }, { passive: true });
 
     // Mobile hamburger
