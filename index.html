@@ -1270,16 +1270,365 @@
       }
     }
 
-    /* Block 8 — Geography */
-    .section-geography {
-      background: var(--bg-secondary);
+    /* ===== BLOCK 7 — QUIZ CTA ===== */
+    .quiz-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
       border-top: 1px solid var(--border-gold);
     }
 
-    /* Block 9 — Testimonials */
-    .section-testimonials {
+    .quiz-cta__left {
       background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 72px;
+    }
+
+    .quiz-cta__content {
+      max-width: 420px;
+    }
+
+    .quiz-cta__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .quiz-cta__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 54px);
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-top: 16px;
+    }
+
+    .quiz-cta__sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 20px;
+    }
+
+    .quiz-cta__divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 36px 0;
+    }
+
+    .quiz-cta__btn {
+      display: block;
+      width: 100%;
+      background: var(--accent-gold);
+      color: var(--bg-primary);
+      padding: 18px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    .quiz-cta__btn:hover {
+      background: var(--accent-gold-light);
+    }
+
+    .quiz-cta__note {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .quiz-cta__right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-cta__img {
+      position: absolute;
+      inset: 0;
+    }
+
+    .quiz-cta__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 1.2s ease-out;
+    }
+
+    .quiz-cta__right:hover .quiz-cta__img img {
+      transform: scale(1.03);
+    }
+
+    .quiz-cta__img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(22,22,20,0.3) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-cta {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-cta__right {
+        order: -1;
+        height: 260px;
+      }
+
+      .quiz-cta__left {
+        padding: 48px 32px;
+      }
+    }
+
+    /* ===== BLOCK 8 — REVIEWS ===== */
+    .section-reviews {
+      background: var(--bg-secondary);
+      min-height: auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 60px;
+      align-items: start;
+      padding: 100px 0 100px 80px;
       border-top: 1px solid var(--border-gold);
+      overflow: hidden;
+    }
+
+    /* Left column */
+    .reviews__left {
+      position: sticky;
+      top: 120px;
+    }
+
+    .reviews__quote {
+      font-family: var(--font-display);
+      font-size: 120px;
+      line-height: 0.8;
+      color: var(--accent-gold);
+      opacity: 0.25;
+      user-select: none;
+    }
+
+    .reviews__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(28px, 3vw, 40px);
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-top: 16px;
+    }
+
+    .reviews__rating {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviews__rating-platform {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .reviews__rating-score {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--accent-gold);
+    }
+
+    .reviews__rating-count {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Navigation */
+    .reviews__nav {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .reviews__nav-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      transition: border-color 0.3s;
+    }
+
+    .reviews__nav-btn:hover {
+      border-color: var(--accent-gold);
+    }
+
+    .reviews__nav-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-secondary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s;
+    }
+
+    .reviews__nav-btn:hover svg {
+      stroke: var(--accent-gold);
+    }
+
+    .reviews__progress {
+      width: 80px;
+      height: 1px;
+      background: var(--border-subtle);
+      position: relative;
+    }
+
+    .reviews__progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--accent-gold);
+      width: 25%;
+      transition: width 0.3s var(--ease-out);
+    }
+
+    /* Right — cards track */
+    .reviews-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-right: 80px;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+
+    .reviews-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Review card */
+    .review-card {
+      min-width: 320px;
+      max-width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 2px solid var(--border-gold);
+      padding: 32px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      transition: border-top-color 0.3s;
+    }
+
+    .review-card:hover {
+      border-top-color: var(--accent-gold);
+    }
+
+    .review-card__stars {
+      font-size: 14px;
+      color: var(--accent-gold);
+      letter-spacing: 2px;
+    }
+
+    .review-card__text {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .review-card__bottom {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .review-card__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .review-card__name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .review-card__date {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* Reviews responsive */
+    @media (max-width: 1024px) {
+      .section-reviews {
+        grid-template-columns: 1fr;
+        padding: 80px 0 80px 24px;
+        gap: 40px;
+      }
+
+      .reviews__left {
+        position: static;
+        padding-right: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .review-card {
+        min-width: 280px;
+        max-width: 280px;
+      }
     }
 
     /* Block 10 — Contact / CTA */
@@ -1551,11 +1900,52 @@
     </div>
   </section>
 
-  <!-- BLOCK 8 — Geography -->
-  <section class="section-geography" id="geography"></section>
+  <!-- BLOCK 7 — Quiz CTA -->
+  <section class="quiz-cta" id="quiz">
+    <div class="quiz-cta__left">
+      <div class="quiz-cta__content reveal">
+        <p class="quiz-cta__label">Подберём дом вашей мечты</p>
+        <h2 class="quiz-cta__title">Пройдите квиз и мы найдём идеальный объект за 48 часов</h2>
+        <p class="quiz-cta__sub">Ответьте на 5 вопросов — и получите персональную подборку объектов с инвестиционным расчётом</p>
+        <div class="quiz-cta__divider"></div>
+        <button class="quiz-cta__btn">Начать подбор</button>
+        <p class="quiz-cta__note">Бесплатно · Без обязательств · 5 минут</p>
+      </div>
+    </div>
+    <div class="quiz-cta__right">
+      <div class="quiz-cta__img">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=960&q=80" alt="Современная архитектура">
+        <div class="quiz-cta__img-overlay"></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- BLOCK 9 — Testimonials -->
-  <section class="section-testimonials" id="testimonials"></section>
+  <!-- BLOCK 8 — Reviews -->
+  <section class="section-reviews" id="reviews">
+    <div class="reviews__left">
+      <span class="reviews__quote">"</span>
+      <h2 class="reviews__title">Что говорят наши клиенты</h2>
+      <div class="reviews__rating">
+        <span class="reviews__rating-platform">Яндекс</span>
+        <span class="reviews__rating-score">4.9 / 5</span>
+      </div>
+      <p class="reviews__rating-count">на основе 47 отзывов</p>
+      <div class="reviews__nav">
+        <button class="reviews__nav-btn" id="reviewsPrev" aria-label="Назад">
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="reviews__progress">
+          <div class="reviews__progress-fill" id="reviewsProgress"></div>
+        </div>
+        <button class="reviews__nav-btn" id="reviewsNext" aria-label="Вперёд">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reviews-track" id="reviewsTrack">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
 
   <!-- BLOCK 10 — Contact / CTA -->
   <section class="section-contact" id="contact"></section>
@@ -1713,6 +2103,55 @@
         marqueeTrack.appendChild(dot);
       });
     }
+
+    // ===== BLOCK 8 — REVIEWS =====
+    const reviews = [
+      { name: 'Александр М.', date: '2 недели назад', stars: 5,
+        text: 'Обратились за помощью в поиске квартиры. Антон очень быстро подобрал несколько вариантов точно под наши критерии. Сделка прошла без единого стресса.' },
+      { name: 'Елена К.', date: '1 месяц назад', stars: 5,
+        text: 'Профессионализм на высшем уровне. Помогли с юридической проверкой, организовали приёмку — всё чисто. Рекомендую всем, кто ценит своё время.' },
+      { name: 'Дмитрий В.', date: '3 недели назад', stars: 5,
+        text: 'Нашли дом у моря за две недели. Казалось невозможным — но команда справилась. Консьерж-сервис действительно работает.' },
+      { name: 'Ирина Н.', date: '2 месяца назад', stars: 5,
+        text: 'Инвестиционный расчёт который они сделали помог принять правильное решение. Купила объект — уже через полгода цена выросла на 12%.' }
+    ];
+
+    const reviewsTrack = document.getElementById('reviewsTrack');
+    reviews.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      const initials = r.name.split(' ').map(w => w[0]).join('');
+      card.innerHTML = `
+        <div class="review-card__stars">${'★'.repeat(r.stars)}</div>
+        <p class="review-card__text">${r.text}</p>
+        <div class="review-card__bottom">
+          <div class="review-card__avatar">${initials}</div>
+          <span class="review-card__name">${r.name}</span>
+          <span class="review-card__date">${r.date}</span>
+        </div>
+      `;
+      reviewsTrack.appendChild(card);
+    });
+
+    // Reviews navigation
+    const reviewsPrev = document.getElementById('reviewsPrev');
+    const reviewsNext = document.getElementById('reviewsNext');
+    const reviewsProgress = document.getElementById('reviewsProgress');
+    const cardStep = 336; // 320 + 16 gap
+
+    function updateReviewsProgress() {
+      const max = reviewsTrack.scrollWidth - reviewsTrack.clientWidth;
+      const pct = max > 0 ? (reviewsTrack.scrollLeft / max) * 100 : 0;
+      reviewsProgress.style.width = Math.max(25, pct) + '%';
+    }
+
+    reviewsPrev.addEventListener('click', () => {
+      reviewsTrack.scrollLeft -= cardStep;
+    });
+    reviewsNext.addEventListener('click', () => {
+      reviewsTrack.scrollLeft += cardStep;
+    });
+    reviewsTrack.addEventListener('scroll', updateReviewsProgress, { passive: true });
 
     // Reveal on scroll (IntersectionObserver)
     const observer = new IntersectionObserver((entries) => {
