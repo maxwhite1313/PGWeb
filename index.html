@@ -1052,12 +1052,14 @@
       overflow: hidden;
       border-top: 1px solid var(--border-gold);
       border-bottom: 1px solid var(--border-gold);
+      padding: 20px 0;
     }
 
     .marquee-track {
       display: flex;
+      align-items: center;
       width: max-content;
-      animation: marquee 32s linear infinite;
+      animation: marquee 28s linear infinite;
     }
 
     .marquee-wrapper:hover .marquee-track {
@@ -1069,56 +1071,21 @@
       to   { transform: translateX(-50%); }
     }
 
-    .concierge__bottom {
-      padding: 0 0 60px;
-    }
-
-    /* Service card */
-    .service-card {
-      min-width: 220px;
-      padding: 36px 28px;
-      border-right: 1px solid var(--border-subtle);
-      background: var(--bg-surface);
-      transition: background 0.3s;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .service-card:hover {
-      background: var(--bg-card);
-    }
-
-    .service-card__num {
-      font-family: var(--font-display);
-      font-size: 40px;
-      font-weight: 300;
-      color: var(--accent-gold-dim);
-      opacity: 0.35;
-      line-height: 1;
-    }
-
-    .service-card__name {
+    .marquee-item {
       font-family: var(--font-body);
+      font-size: 14px;
       font-weight: 300;
-      font-size: 13px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--text-primary);
-      text-transform: uppercase;
-      line-height: 1.5;
-      margin-top: 12px;
+      white-space: nowrap;
+      padding: 0 32px;
     }
 
-    .service-card__line {
-      display: block;
-      width: 0;
-      height: 1px;
-      background: var(--accent-gold);
-      margin-top: 16px;
-      transition: width 0.4s var(--ease-out);
-    }
-
-    .service-card:hover .service-card__line {
-      width: 32px;
+    .marquee-dot {
+      color: var(--accent-gold);
+      font-size: 18px;
+      line-height: 1;
+      flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
@@ -1335,10 +1302,9 @@
     </div>
     <div class="marquee-wrapper">
       <div class="marquee-track" id="marqueeTrack">
-        <!-- Duplicated by JS for seamless loop -->
+        <!-- Rendered by JS — text items with dot separators, duplicated for seamless loop -->
       </div>
     </div>
-    <div class="concierge__bottom"></div>
   </section>
 
   <!-- BLOCK 8 — Geography -->
@@ -1489,17 +1455,18 @@
     ];
 
     const marqueeTrack = document.getElementById('marqueeTrack');
-    // Render cards twice for seamless loop
+    // Render text items with dot separators, twice for seamless loop
     for (let rep = 0; rep < 2; rep++) {
       services.forEach((name, i) => {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        card.innerHTML = `
-          <span class="service-card__num">${String(i + 1).padStart(2, '0')}</span>
-          <p class="service-card__name">${name}</p>
-          <span class="service-card__line"></span>
-        `;
-        marqueeTrack.appendChild(card);
+        const item = document.createElement('span');
+        item.className = 'marquee-item';
+        item.textContent = name;
+        marqueeTrack.appendChild(item);
+
+        const dot = document.createElement('span');
+        dot.className = 'marquee-dot';
+        dot.textContent = '\u00B7';
+        marqueeTrack.appendChild(dot);
       });
     }
 
