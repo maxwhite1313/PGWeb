@@ -805,14 +805,25 @@
       overflow: hidden;
     }
 
+    .team__header {
+      margin-bottom: 48px;
+    }
+
+    .team__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
     .team__section-title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: var(--text-h1);
+      font-size: var(--text-h2);
       color: var(--text-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 48px;
     }
 
     .team__layout {
@@ -1276,7 +1287,10 @@
 
   <!-- BLOCK 4 — Team -->
   <section class="section-team" id="team">
-    <h2 class="team__section-title">Наша команда</h2>
+    <div class="team__header">
+      <p class="team__label">Наша команда</p>
+      <h2 class="team__section-title">Специалисты агентства</h2>
+    </div>
     <div class="team__layout">
       <!-- Left — main photo -->
       <div class="team__photo-col">
