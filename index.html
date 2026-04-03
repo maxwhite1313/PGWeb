@@ -1066,6 +1066,203 @@
       opacity: 0.7;
     }
 
+    /* ===== BLOCK 6 — WHY US ===== */
+    .section-why {
+      background: var(--bg-primary);
+      min-height: auto;
+      display: block;
+      padding: 100px 0;
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .why__inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .why__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--text-primary);
+    }
+
+    .why__title-line {
+      width: 60px;
+      height: 1px;
+      background: var(--border-gold);
+      margin: 24px 0 48px;
+    }
+
+    /* Comparison grid */
+    .why__compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .why__block {
+      padding: 40px;
+    }
+
+    .why__block--left {
+      background: var(--bg-surface);
+    }
+
+    .why__block--right {
+      background: var(--bg-card);
+      border-top: 2px solid var(--accent-gold);
+    }
+
+    .why__block-title {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .why__block--left .why__block-title {
+      color: var(--text-muted);
+    }
+
+    .why__block--right .why__block-title {
+      color: var(--accent-gold);
+    }
+
+    /* Item row */
+    .why-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .why-item:last-child {
+      border-bottom: none;
+    }
+
+    .why-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .why-item:hover .why-icon {
+      transform: rotate(45deg);
+    }
+
+    .why-item--minus .why-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .why-item--minus .why-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-muted);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .why-item--plus .why-icon {
+      background: var(--accent-gold);
+    }
+
+    .why-item--plus .why-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--bg-primary);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .why-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .why-item--plus .why-text {
+      color: var(--text-primary);
+    }
+
+    /* Bottom advantages */
+    .why__advantages {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 2px;
+    }
+
+    .why__adv {
+      background: var(--bg-surface);
+      padding: 36px 32px;
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .why__adv:last-child {
+      border-right: none;
+    }
+
+    .why__adv-num {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 300;
+      color: var(--accent-gold-dim);
+      opacity: 0.5;
+      line-height: 1;
+    }
+
+    .why__adv-text {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* Why responsive */
+    @media (max-width: 1024px) {
+      .why__compare {
+        grid-template-columns: 1fr;
+      }
+
+      .why__advantages {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-why {
+        padding: 80px 0;
+      }
+
+      .why__inner {
+        padding: 0 24px;
+      }
+
+      .why__block {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .why__advantages {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Block 8 — Geography */
     .section-geography {
       background: var(--bg-secondary);
@@ -1271,6 +1468,76 @@
     <div class="marquee-wrapper">
       <div class="marquee-track" id="marqueeTrack">
         <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 6 — Why Us -->
+  <section class="section-why" id="why">
+    <div class="why__inner">
+      <h2 class="why__title reveal">Почему именно мы?</h2>
+      <div class="why__title-line"></div>
+
+      <div class="why__compare reveal">
+        <!-- Left — self search -->
+        <div class="why__block why__block--left">
+          <p class="why__block-title">Самостоятельный поиск</p>
+          <div class="why-item why-item--minus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></div>
+            <span class="why-text">Месяцы поисков без гарантированного результата</span>
+          </div>
+          <div class="why-item why-item--minus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></div>
+            <span class="why-text">Риск переплатить или купить проблемный объект</span>
+          </div>
+          <div class="why-item why-item--minus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></div>
+            <span class="why-text">Стресс от юридических тонкостей и документов</span>
+          </div>
+          <div class="why-item why-item--minus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></div>
+            <span class="why-text">Показы в неудобное время без фильтрации</span>
+          </div>
+        </div>
+        <!-- Right — with us -->
+        <div class="why__block why__block--right">
+          <p class="why__block-title">Поиск с нашей помощью</p>
+          <div class="why-item why-item--plus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+            <span class="why-text">Быстрый подбор под ваши критерии</span>
+          </div>
+          <div class="why-item why-item--plus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+            <span class="why-text">Профессиональная юридическая проверка объекта</span>
+          </div>
+          <div class="why-item why-item--plus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+            <span class="why-text">Минимизация рисков на каждом этапе сделки</span>
+          </div>
+          <div class="why-item why-item--plus">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+            <span class="why-text">Индивидуальное сопровождение и удобство</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="why__advantages">
+        <div class="why__adv reveal">
+          <span class="why__adv-num">01</span>
+          <p class="why__adv-text">Не берём комиссию за сделку</p>
+        </div>
+        <div class="why__adv reveal">
+          <span class="why__adv-num">02</span>
+          <p class="why__adv-text">Консьерж сервис</p>
+        </div>
+        <div class="why__adv reveal">
+          <span class="why__adv-num">03</span>
+          <p class="why__adv-text">Инвестиционный расчёт</p>
+        </div>
+        <div class="why__adv reveal">
+          <span class="why__adv-num">04</span>
+          <p class="why__adv-text">Онлайн показ</p>
+        </div>
       </div>
     </div>
   </section>
