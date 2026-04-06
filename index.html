@@ -15,13 +15,13 @@
       --bg-secondary:      #0F0F0D;
       --bg-surface:        #161614;
       --bg-card:           #1A1A18;
-      --accent-gold:       #83825F;
-      --accent-gold-light: #A3A27E;
-      --accent-gold-dim:   #5A5940;
+      --accent-gold:       #C8A97E;
+      --accent-gold-light: #E2C99E;
+      --accent-gold-dim:   #6B5A3E;
       --text-primary:      #F0EDE8;
       --text-secondary:    #8A8780;
       --text-muted:        #4A4845;
-      --border-gold:       rgba(131, 130, 95, 0.15);
+      --border-gold:       rgba(200, 169, 126, 0.12);
       --border-subtle:     rgba(240, 237, 232, 0.06);
       --overlay-dark:      rgba(8, 8, 8, 0.72);
 
@@ -35,7 +35,7 @@
       --hero-title-color:  rgba(255, 255, 255, 0.92);
       --pill-bg:           rgba(240, 237, 232, 0.06);
       --pill-border:       rgba(240, 237, 232, 0.08);
-      --pill-active:       rgba(131, 130, 95, 0.18);
+      --pill-active:       rgba(200, 169, 126, 0.15);
       --scroll-arrow:      #fff;
       --map-filter:        grayscale(1) invert(0.92) contrast(0.85);
 
@@ -61,13 +61,13 @@
       --bg-secondary:      #EDEAE4;
       --bg-surface:        #E8E5DF;
       --bg-card:           #DFDCD6;
-      --accent-gold:       #6E6D4E;
-      --accent-gold-light: #8A895E;
-      --accent-gold-dim:   #B0AF8A;
+      --accent-gold:       #A68B5B;
+      --accent-gold-light: #BFA474;
+      --accent-gold-dim:   #C4B599;
       --text-primary:      #1A1A18;
       --text-secondary:    #5A5850;
       --text-muted:        #9A978F;
-      --border-gold:       rgba(131, 130, 95, 0.20);
+      --border-gold:       rgba(166, 139, 91, 0.18);
       --border-subtle:     rgba(26, 26, 24, 0.08);
       --overlay-dark:      rgba(245, 243, 239, 0.72);
 
@@ -80,7 +80,7 @@
       --hero-title-color:  rgba(26, 26, 24, 0.88);
       --pill-bg:           rgba(26, 26, 24, 0.05);
       --pill-border:       rgba(26, 26, 24, 0.08);
-      --pill-active:       rgba(131, 130, 95, 0.20);
+      --pill-active:       rgba(166, 139, 91, 0.18);
       --scroll-arrow:      #1A1A18;
       --map-filter:        grayscale(0.3) contrast(0.95);
     }
@@ -199,40 +199,36 @@
       font-style: italic;
     }
 
-    /* Pill menu — hidden, moved to burger overlay */
+    /* Pill menu */
     .nav__menu {
-      display: none;
-    }
-
-    /* Center zone — address + status */
-    .nav__center {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 4px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: 100px;
+      padding: 4px;
     }
 
-    .nav__status {
-      width: 8px;
-      height: 8px;
-      background: #4CAF50;
-      border-radius: 50%;
-      flex-shrink: 0;
-      box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
-      animation: statusPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes statusPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .nav__address {
+    .nav__menu a {
       font-family: var(--font-body);
       font-size: 12px;
       font-weight: 300;
+      letter-spacing: 0.04em;
       color: var(--text-secondary);
-      letter-spacing: 0.02em;
+      padding: 8px 20px;
+      border-radius: 100px;
+      transition: color 0.25s, background 0.25s;
       white-space: nowrap;
+    }
+
+    .nav__menu a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav__menu a.active {
+      background: var(--pill-active);
+      color: var(--text-primary);
     }
 
     /* Right zone */
@@ -370,9 +366,9 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
 
-    /* Hamburger — always visible */
+    /* Hamburger */
     .nav__hamburger {
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 5px;
       padding: 8px;
@@ -445,6 +441,7 @@
         padding: 0 20px;
       }
 
+      .nav__menu,
       .nav__socials,
       .nav__divider,
       .nav__phone-link,
@@ -452,8 +449,8 @@
         display: none;
       }
 
-      .nav__address {
-        display: none;
+      .nav__hamburger {
+        display: flex;
       }
     }
 
@@ -471,15 +468,18 @@
       height: 100vh;
       min-height: 100vh;
       overflow: hidden;
-      background: #080808;
+      background: var(--bg-primary);
     }
 
-    /* Dark overlay for the hero — always dark regardless of theme */
+    /* Top gradient for navbar readability */
     .section-hero::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(8, 8, 8, 0.55);
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, var(--hero-gradient-top) 0%, transparent 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -509,60 +509,75 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      background: linear-gradient(to top, rgba(8, 8, 8, 0.85) 0%, transparent 50%);
+      background: linear-gradient(to top, var(--hero-gradient-bot) 0%, transparent 45%);
       pointer-events: none;
     }
 
-    /* Hero content — two-column layout */
-    .hero__content {
-      position: relative;
-      z-index: 4;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 80px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 60px;
-    }
-
-    /* Left — heading + sub */
-    .hero__left {
-      flex: 1;
-      max-width: 680px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s var(--ease-out) 0.3s forwards;
-    }
-
-    .hero__label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #83825F;
-      margin-bottom: 24px;
-    }
-
+    /* Layer 3 — Title */
     .hero__title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(40px, 5.5vw, 72px);
-      color: #F0EDE8;
-      line-height: 1.1;
+      font-size: clamp(80px, 14vw, 200px);
+      color: var(--hero-title-color);
       letter-spacing: -0.01em;
+      white-space: nowrap;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+      opacity: 0;
+      animation: heroTitle 1.4s ease-out 0.2s forwards;
+    }
+
+    @keyframes heroTitle {
+      from {
+        opacity: 0;
+        letter-spacing: 0.04em;
+      }
+      to {
+        opacity: 1;
+        letter-spacing: -0.01em;
+      }
+    }
+
+    /* Layer 4 — Bottom content */
+    .hero__bottom {
+      position: absolute;
+      bottom: 48px;
+      left: 60px;
+      right: 60px;
+      z-index: 4;
+    }
+
+    /* Left bottom */
+    .hero__left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s var(--ease-out) 0.6s forwards;
+    }
+
+    .hero__slogan {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.3;
     }
 
     .hero__sub {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.5);
-      max-width: 480px;
-      line-height: 1.7;
-      margin-top: 24px;
+      font-size: 14px;
+      color: var(--hero-text-sub);
+      max-width: 320px;
+      line-height: 1.6;
+      margin-top: 8px;
     }
 
     @keyframes fadeUp {
@@ -572,77 +587,16 @@
       }
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Right — text + CTA */
-    .hero__right {
-      flex: 0 0 360px;
-      opacity: 0;
-      transform: translateX(30px);
-      animation: slideInRight 0.9s var(--ease-out) 0.7s forwards;
-    }
-
-    @keyframes slideInRight {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .hero__right-text {
-      font-family: var(--font-body);
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .hero__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #F0EDE8;
-      background: #83825F;
-      padding: 16px 36px;
-      transition: background 0.3s, transform 0.3s;
-      cursor: pointer;
-      border: none;
-    }
-
-    .hero__cta:hover {
-      background: #6E6D4E;
-      transform: translateY(-2px);
-    }
-
-    .hero__cta svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* Scroll indicator */
+    /* Center bottom — scroll button */
     .hero__scroll {
       position: absolute;
-      bottom: 40px;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 4;
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid var(--hero-scroll-border);
       background: transparent;
       display: flex;
       align-items: center;
@@ -650,17 +604,17 @@
       cursor: pointer;
       transition: border-color 0.3s;
       opacity: 0;
-      animation: fadeIn 0.8s var(--ease-out) 1s forwards;
+      animation: fadeIn 0.8s var(--ease-out) 0.8s forwards;
     }
 
     .hero__scroll:hover {
-      border-color: #83825F;
+      border-color: var(--accent-gold);
     }
 
     .hero__scroll svg {
       width: 16px;
       height: 16px;
-      stroke: #fff;
+      stroke: var(--scroll-arrow);
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
@@ -670,7 +624,7 @@
     }
 
     .hero__scroll:hover svg {
-      stroke: #83825F;
+      stroke: var(--accent-gold);
     }
 
     @keyframes scrollPulse {
@@ -678,61 +632,101 @@
       50% { transform: translateY(4px); }
     }
 
-    /* Hero stats bar */
-    .hero__stats {
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Right bottom — featured card */
+    .hero__card {
       position: absolute;
       bottom: 0;
-      left: 0;
       right: 0;
-      z-index: 4;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 8, 8, 0.5);
+      background: var(--hero-card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-gold);
+      padding: 24px 28px;
+      width: 280px;
+      opacity: 0;
+      transform: translateX(30px);
+      animation: slideInRight 0.9s var(--ease-out) 1.0s forwards;
     }
 
-    .hero__stats-inner {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 20px 80px;
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero__card-top {
       display: flex;
-      justify-content: space-between;
-      gap: 40px;
+      gap: 14px;
+      align-items: flex-start;
     }
 
-    .hero__stat {
+    .hero__card-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .hero__card-info {
       display: flex;
-      align-items: baseline;
-      gap: 8px;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .hero__stat-num {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 300;
-      color: #83825F;
-    }
-
-    .hero__stat-label {
+    .hero__card-label {
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 300;
-      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .hero__card-name {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .hero__card-price {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--accent-gold);
+    }
+
+    .hero__card-link {
+      display: block;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-gold);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      transition: color 0.25s;
+    }
+
+    .hero__card-link:hover {
+      color: var(--accent-gold);
     }
 
     /* Hero mobile */
     @media (max-width: 768px) {
-      .hero__content {
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 24px;
-        gap: 32px;
-        padding-top: 80px;
+      .hero__bottom {
+        left: 24px;
+        right: 24px;
+        bottom: 32px;
       }
 
-      .hero__right {
-        flex: none;
-        width: 100%;
+      .hero__card {
+        display: none;
       }
 
       .hero__scroll {
@@ -740,17 +734,7 @@
       }
 
       .hero__title {
-        font-size: clamp(32px, 9vw, 52px);
-      }
-
-      .hero__stats-inner {
-        padding: 16px 24px;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
-
-      .hero__stat-num {
-        font-size: 22px;
+        font-size: clamp(48px, 14vw, 96px);
       }
     }
 
@@ -2258,9 +2242,12 @@
   <nav class="nav" id="nav">
     <a href="#" class="nav__logo">PH.GENIE<span class="nav__logo-r">R</span></a>
 
-    <div class="nav__center">
-      <span class="nav__status"></span>
-      <span class="nav__address">г. Калининград, ул. Баграмяна, 4</span>
+    <div class="nav__menu">
+      <a href="#hero" class="active">Главная</a>
+      <a href="#team">Команда</a>
+      <a href="#categories">Каталог</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contact">Контакты</a>
     </div>
 
     <div class="nav__right">
@@ -2295,12 +2282,11 @@
     </button>
   </nav>
 
-  <!-- Menu overlay (burger) -->
+  <!-- Mobile overlay -->
   <div class="nav__overlay" id="mobileMenu">
-    <a href="#hero">Главная</a>
-    <a href="#categories">Каталог</a>
+    <a href="#catalog">Каталог</a>
     <a href="#team">Команда</a>
-    <a href="#reviews">Отзывы</a>
+    <a href="#featured">Объекты</a>
     <a href="#contact">Контакты</a>
     <a href="tel:+79060311066" class="nav__overlay-phone">+7 (906) 031-10-66</a>
   </div>
@@ -2313,50 +2299,31 @@
     </div>
     <!-- Layer 2 — Gradient -->
     <div class="hero__gradient"></div>
-
-    <!-- Hero content -->
-    <div class="hero__content">
-      <!-- Left — heading -->
+    <!-- Layer 3 — Title -->
+    <h1 class="hero__title">PH.GENIE<span style="font-style:italic">R</span></h1>
+    <!-- Layer 4 — Bottom content -->
+    <div class="hero__bottom">
+      <!-- Left -->
       <div class="hero__left">
-        <p class="hero__label">PH.GENIER — Калининград</p>
-        <h1 class="hero__title">Агентство элитной<br>недвижимости<br>в Калининграде</h1>
-        <p class="hero__sub">Подберём премиальную недвижимость, проведём сделку под ключ и обеспечим юридическую безопасность на каждом этапе</p>
+        <p class="hero__slogan">Жильё, достойное ваших эмоций</p>
+        <p class="hero__sub">Помогаем найти дом, который соответствует вашей жизни</p>
       </div>
-      <!-- Right — text + CTA -->
-      <div class="hero__right">
-        <p class="hero__right-text">Мы специализируемся на объектах премиум-класса: новостройки, загородные резиденции, коммерческая недвижимость. Индивидуальный подход и полное сопровождение сделки.</p>
-        <a href="#contact" class="hero__cta">
-          Подобрать объект
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Scroll button -->
-    <button class="hero__scroll" id="heroScroll" aria-label="Прокрутить вниз">
-      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </button>
-
-    <!-- Stats bar -->
-    <div class="hero__stats">
-      <div class="hero__stats-inner">
-        <div class="hero__stat">
-          <span class="hero__stat-num">150+</span>
-          <span class="hero__stat-label">объектов в базе</span>
+      <!-- Center — scroll -->
+      <button class="hero__scroll" id="heroScroll" aria-label="Прокрутить вниз">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </button>
+      <!-- Right — featured card -->
+      <a href="#featured" class="hero__card">
+        <div class="hero__card-top">
+          <img class="hero__card-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=120&q=80" alt="Объект">
+          <div class="hero__card-info">
+            <span class="hero__card-label">FEATURED</span>
+            <span class="hero__card-name">Вилла на побережье</span>
+            <span class="hero__card-price">₽ 48 000 000</span>
+          </div>
         </div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">12</span>
-          <span class="hero__stat-label">лет на рынке</span>
-        </div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">98%</span>
-          <span class="hero__stat-label">довольных клиентов</span>
-        </div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">₽ 2.4 млрд</span>
-          <span class="hero__stat-label">объём сделок</span>
-        </div>
-      </div>
+        <span class="hero__card-link">Смотреть объект →</span>
+      </a>
     </div>
   </section>
 
@@ -2732,8 +2699,13 @@
       localStorage.setItem('phg-theme', next);
     });
 
-    // Scroll behavior — nav background
+    // Scroll behavior — nav background + active menu item
     const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav__menu a');
+    const sections = Array.from(navLinks).map(link => {
+      const id = link.getAttribute('href').slice(1);
+      return document.getElementById(id);
+    }).filter(Boolean);
 
     window.addEventListener('scroll', () => {
       if (window.scrollY > 60) {
@@ -2741,6 +2713,17 @@
       } else {
         nav.classList.remove('scrolled');
       }
+
+      // Active section tracking
+      let currentId = 'hero';
+      sections.forEach(sec => {
+        if (sec.offsetTop - 120 <= window.scrollY) {
+          currentId = sec.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
     }, { passive: true });
 
     // Mobile hamburger
