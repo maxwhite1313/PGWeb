@@ -10,7 +10,7 @@
   <style>
     /* ===== DESIGN SYSTEM — CSS VARIABLES ===== */
     :root {
-      /* Colors */
+      /* Colors — Dark theme (default) */
       --bg-primary:        #080808;
       --bg-secondary:      #0F0F0D;
       --bg-surface:        #161614;
@@ -24,6 +24,20 @@
       --border-gold:       rgba(200, 169, 126, 0.12);
       --border-subtle:     rgba(240, 237, 232, 0.06);
       --overlay-dark:      rgba(8, 8, 8, 0.72);
+
+      /* Theme-aware overlays */
+      --nav-bg:            rgba(8, 8, 8, 0.92);
+      --hero-gradient-top: rgba(8, 8, 8, 0.65);
+      --hero-gradient-bot: rgba(8, 8, 8, 0.75);
+      --hero-text-sub:     rgba(255, 255, 255, 0.6);
+      --hero-scroll-border:rgba(255, 255, 255, 0.4);
+      --hero-card-bg:      rgba(22, 22, 20, 0.85);
+      --hero-title-color:  rgba(255, 255, 255, 0.92);
+      --pill-bg:           rgba(240, 237, 232, 0.06);
+      --pill-border:       rgba(240, 237, 232, 0.08);
+      --pill-active:       rgba(200, 169, 126, 0.15);
+      --scroll-arrow:      #fff;
+      --map-filter:        grayscale(1) invert(0.92) contrast(0.85);
 
       /* Typography */
       --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -39,6 +53,36 @@
 
       /* Animation */
       --ease-out: cubic-bezier(0.25, 0, 0, 1);
+    }
+
+    /* ===== LIGHT THEME ===== */
+    [data-theme="light"] {
+      --bg-primary:        #F5F3EF;
+      --bg-secondary:      #EDEAE4;
+      --bg-surface:        #E8E5DF;
+      --bg-card:           #DFDCD6;
+      --accent-gold:       #A68B5B;
+      --accent-gold-light: #BFA474;
+      --accent-gold-dim:   #C4B599;
+      --text-primary:      #1A1A18;
+      --text-secondary:    #5A5850;
+      --text-muted:        #9A978F;
+      --border-gold:       rgba(166, 139, 91, 0.18);
+      --border-subtle:     rgba(26, 26, 24, 0.08);
+      --overlay-dark:      rgba(245, 243, 239, 0.72);
+
+      --nav-bg:            rgba(245, 243, 239, 0.92);
+      --hero-gradient-top: rgba(245, 243, 239, 0.55);
+      --hero-gradient-bot: rgba(245, 243, 239, 0.7);
+      --hero-text-sub:     rgba(26, 26, 24, 0.6);
+      --hero-scroll-border:rgba(26, 26, 24, 0.3);
+      --hero-card-bg:      rgba(237, 234, 228, 0.92);
+      --hero-title-color:  rgba(26, 26, 24, 0.88);
+      --pill-bg:           rgba(26, 26, 24, 0.05);
+      --pill-border:       rgba(26, 26, 24, 0.08);
+      --pill-active:       rgba(166, 139, 91, 0.18);
+      --scroll-arrow:      #1A1A18;
+      --map-filter:        grayscale(0.3) contrast(0.95);
     }
 
     /* ===== GLOBAL RESET & BASE ===== */
@@ -62,6 +106,7 @@
       background: var(--bg-primary);
       line-height: 1.6;
       border-radius: 0;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     a {
@@ -133,7 +178,7 @@
     }
 
     .nav.scrolled {
-      background: rgba(8, 8, 8, 0.92);
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-gold);
@@ -159,8 +204,8 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      background: rgba(240, 237, 232, 0.06);
-      border: 1px solid rgba(240, 237, 232, 0.08);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
       border-radius: 100px;
       padding: 4px;
     }
@@ -182,7 +227,7 @@
     }
 
     .nav__menu a.active {
-      background: rgba(200, 169, 126, 0.15);
+      background: var(--pill-active);
       color: var(--text-primary);
     }
 
@@ -253,6 +298,72 @@
       stroke: var(--bg-primary);
       fill: none;
       stroke-width: 2;
+    }
+
+    /* Theme toggle */
+    .nav__theme-toggle {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      color: var(--text-muted);
+      transition: color 0.3s, border-color 0.3s;
+      padding: 0;
+    }
+
+    .nav__theme-toggle:hover {
+      color: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    .nav__theme-toggle svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav__theme-toggle .icon-moon { display: block; }
+    .nav__theme-toggle .icon-sun { display: none; }
+
+    [data-theme="light"] .nav__theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .nav__theme-toggle .icon-sun { display: block; }
+
+    /* Light theme overrides for specific elements */
+    [data-theme="light"] .nav__phone-icon {
+      background: var(--accent-gold);
+    }
+
+    [data-theme="light"] .nav__phone-icon svg {
+      stroke: #fff;
+    }
+
+    [data-theme="light"] .submit-circle {
+      background: var(--accent-gold);
+    }
+
+    [data-theme="light"] .submit-circle svg {
+      stroke: #fff;
+    }
+
+    [data-theme="light"] .quiz-cta__btn {
+      color: #fff;
+    }
+
+    [data-theme="light"] .why-item--plus .why-icon svg {
+      stroke: #fff;
+    }
+
+    [data-theme="light"] .team__main-photo-wrap {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
 
     /* Hamburger */
@@ -333,7 +444,8 @@
       .nav__menu,
       .nav__socials,
       .nav__divider,
-      .nav__phone-link {
+      .nav__phone-link,
+      .nav__theme-toggle {
         display: none;
       }
 
@@ -367,7 +479,7 @@
       left: 0;
       right: 0;
       height: 180px;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.65) 0%, transparent 100%);
+      background: linear-gradient(to bottom, var(--hero-gradient-top) 0%, transparent 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -397,7 +509,7 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, transparent 45%);
+      background: linear-gradient(to top, var(--hero-gradient-bot) 0%, transparent 45%);
       pointer-events: none;
     }
 
@@ -411,7 +523,7 @@
       font-family: var(--font-display);
       font-weight: 300;
       font-size: clamp(80px, 14vw, 200px);
-      color: rgba(255, 255, 255, 0.92);
+      color: var(--hero-title-color);
       letter-spacing: -0.01em;
       white-space: nowrap;
       text-shadow: 0 2px 40px rgba(0,0,0,0.3);
@@ -462,7 +574,7 @@
       font-family: var(--font-body);
       font-weight: 300;
       font-size: 14px;
-      color: rgba(255,255,255,0.6);
+      color: var(--hero-text-sub);
       max-width: 320px;
       line-height: 1.6;
       margin-top: 8px;
@@ -484,7 +596,7 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid var(--hero-scroll-border);
       background: transparent;
       display: flex;
       align-items: center;
@@ -502,7 +614,7 @@
     .hero__scroll svg {
       width: 16px;
       height: 16px;
-      stroke: #fff;
+      stroke: var(--scroll-arrow);
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
@@ -529,7 +641,7 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      background: rgba(22,22,20,0.85);
+      background: var(--hero-card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-gold);
@@ -1374,7 +1486,7 @@
     .quiz-cta__img-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(22,22,20,0.3) 0%, transparent 40%);
+      background: linear-gradient(to right, var(--hero-card-bg) 0%, transparent 40%);
       pointer-events: none;
     }
 
@@ -1895,7 +2007,7 @@
       width: 100%;
       height: 100%;
       border: none;
-      filter: grayscale(1) invert(0.92) contrast(0.85);
+      filter: var(--map-filter);
     }
 
     .map__card {
@@ -2147,6 +2259,10 @@
           <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 21.5c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.6.9.9-3.5-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.5 6.7 2 12 2s9.8 4.5 9.8 10S17.3 22 12 22z"/></svg>
         </a>
       </div>
+      <button class="nav__theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
       <div class="nav__divider"></div>
       <a href="tel:+79060311066" class="nav__phone-link">
         <span class="nav__phone-icon">
@@ -2561,6 +2677,25 @@
   </footer>
 
   <script>
+    // ===== THEME: auto-detect by time of day + manual toggle =====
+    (function() {
+      const saved = localStorage.getItem('phg-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        const hour = new Date().getHours();
+        const isDay = hour >= 7 && hour < 19;
+        document.documentElement.setAttribute('data-theme', isDay ? 'light' : 'dark');
+      }
+    })();
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('phg-theme', next);
+    });
+
     // Scroll behavior — nav background + active menu item
     const nav = document.getElementById('nav');
     const navLinks = document.querySelectorAll('.nav__menu a');
