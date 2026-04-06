@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Объекты — PH.GENIER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+    :root {
+      --bg-primary:        #080808;
+      --bg-secondary:      #0F0F0D;
+      --bg-surface:        #161614;
+      --bg-card:           #1A1A18;
+      --accent-gold:       #C8A97E;
+      --accent-gold-light: #E2C99E;
+      --accent-gold-dim:   #6B5A3E;
+      --text-primary:      #F0EDE8;
+      --text-secondary:    #8A8780;
+      --text-muted:        #4A4845;
+      --border-gold:       rgba(200, 169, 126, 0.12);
+      --border-subtle:     rgba(240, 237, 232, 0.06);
+      --nav-bg:            rgba(8, 8, 8, 0.92);
+      --pill-bg:           rgba(240, 237, 232, 0.06);
+      --pill-border:       rgba(240, 237, 232, 0.08);
+      --pill-active:       rgba(200, 169, 126, 0.15);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', 'DM Sans', sans-serif;
+      --text-h2:      clamp(28px, 3.5vw, 48px);
+      --ease-out: cubic-bezier(0.25, 0, 0, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary:        #F5F3EF;
+      --bg-secondary:      #EDEAE4;
+      --bg-surface:        #E8E5DF;
+      --bg-card:           #DFDCD6;
+      --accent-gold:       #A68B5B;
+      --accent-gold-light: #BFA474;
+      --accent-gold-dim:   #C4B599;
+      --text-primary:      #1A1A18;
+      --text-secondary:    #5A5850;
+      --text-muted:        #9A978F;
+      --border-gold:       rgba(166, 139, 91, 0.18);
+      --border-subtle:     rgba(26, 26, 24, 0.08);
+      --nav-bg:            rgba(245, 243, 239, 0.92);
+      --pill-bg:           rgba(26, 26, 24, 0.05);
+      --pill-border:       rgba(26, 26, 24, 0.08);
+      --pill-active:       rgba(166, 139, 91, 0.18);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== NAV (same as index) ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-gold);
+      transition: background 0.4s ease;
+    }
+    .nav__logo {
+      font-family: var(--font-display); font-size: 22px; font-weight: 400;
+      letter-spacing: 0.06em; color: var(--text-primary); white-space: nowrap;
+    }
+    .nav__logo-r { font-style: italic; }
+    .nav__menu {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--pill-bg); border: 1px solid var(--pill-border);
+      border-radius: 100px; padding: 4px;
+    }
+    .nav__menu a {
+      font-size: 12px; font-weight: 300; letter-spacing: 0.04em;
+      color: var(--text-secondary); padding: 8px 20px; border-radius: 100px;
+      transition: color 0.25s, background 0.25s; white-space: nowrap;
+    }
+    .nav__menu a:hover { color: var(--text-primary); }
+    .nav__menu a.active { background: var(--pill-active); color: var(--text-primary); }
+    .nav__right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+    .nav__socials { display: flex; align-items: center; gap: 12px; }
+    .nav__social { color: var(--text-muted); transition: color 0.25s; display: flex; }
+    .nav__social:hover { color: var(--accent-gold); }
+    .nav__social svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav__theme-toggle {
+      width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border-subtle); border-radius: 50%;
+      color: var(--text-muted); transition: color 0.3s, border-color 0.3s; padding: 0;
+    }
+    .nav__theme-toggle:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+    .nav__theme-toggle svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .nav__theme-toggle .icon-moon { display: block; }
+    .nav__theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .nav__theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .nav__theme-toggle .icon-sun { display: block; }
+    .nav__divider { width: 1px; height: 24px; background: var(--border-subtle); }
+    .nav__phone-link {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400; color: var(--text-primary); white-space: nowrap;
+    }
+    .nav__phone-icon {
+      width: 28px; height: 28px; background: var(--accent-gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav__phone-icon svg { width: 12px; height: 12px; stroke: var(--bg-primary); fill: none; stroke-width: 2; }
+    [data-theme="light"] .nav__phone-icon svg { stroke: #fff; }
+    .nav__hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .nav__hamburger span { display: block; width: 20px; height: 1px; background: var(--text-primary); }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav__menu, .nav__socials, .nav__divider, .nav__phone-link, .nav__theme-toggle { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+
+    /* ===== PAGE LAYOUT ===== */
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 96px 80px 80px;
+    }
+
+    @media (max-width: 768px) {
+      .page { padding: 80px 20px 48px; }
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      margin-bottom: 40px;
+    }
+
+    .page-header__label {
+      font-size: 10px; font-weight: 300; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent-gold); margin-bottom: 12px;
+    }
+
+    .page-header__title {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: var(--text-h2); color: var(--text-primary);
+    }
+
+    /* ===== FILTERS ===== */
+    .filters {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+
+    .filters__row {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1fr;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-label {
+      font-size: 10px; font-weight: 300; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+
+    .filter-select,
+    .filter-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 300;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .filter-select:focus,
+    .filter-input:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .filter-select option {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .filter-range {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-range__sep {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Tags */
+    .filters__tags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tag {
+      font-size: 12px; font-weight: 300; letter-spacing: 0.03em;
+      color: var(--text-secondary);
+      padding: 7px 18px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .filter-tag:hover {
+      border-color: var(--accent-gold);
+      color: var(--text-primary);
+    }
+
+    .filter-tag.active {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--bg-primary);
+      font-weight: 400;
+    }
+
+    [data-theme="light"] .filter-tag.active {
+      color: #fff;
+    }
+
+    .filters__reset {
+      font-size: 12px; font-weight: 300;
+      color: var(--text-muted);
+      margin-left: auto;
+      cursor: pointer;
+      transition: color 0.25s;
+      background: none; border: none;
+    }
+
+    .filters__reset:hover {
+      color: var(--accent-gold);
+    }
+
+    @media (max-width: 1024px) {
+      .filters__row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .filters__row {
+        grid-template-columns: 1fr;
+      }
+      .filters {
+        padding: 20px;
+      }
+    }
+
+    /* ===== OBJECT CARDS ===== */
+    .objects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .object-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-subtle);
+      align-items: start;
+    }
+
+    .object-card:last-child {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Left — info */
+    .obj__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .obj__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3vw, 32px);
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .obj__badge {
+      font-size: 10px; font-weight: 300; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      border: 1px solid var(--border-gold);
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .obj__location {
+      font-size: 13px; font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .obj__desc {
+      font-size: 14px; font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 24px;
+    }
+
+    /* Price section */
+    .obj__price-main {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 400;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
+    .obj__price-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 20px;
+    }
+
+    .obj__price-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      align-items: baseline;
+    }
+
+    .obj__price-row:last-child {
+      border-bottom: none;
+    }
+
+    .obj__price-config {
+      font-size: 13px; font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .obj__price-config span {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .obj__price-val {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-primary);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .obj__meta {
+      font-size: 12px; font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    /* Right — photos */
+    .obj__photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .obj__photo {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .obj__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .obj__photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .obj__photo:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .object-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .object-card {
+        padding: 28px 0;
+      }
+
+      .obj__photos {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .obj__photo:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">PH.GENIE<span class="nav__logo-r">R</span></a>
+    <div class="nav__menu">
+      <a href="index.html">Главная</a>
+      <a href="index.html#team">Команда</a>
+      <a href="objects.html" class="active">Каталог</a>
+      <a href="index.html#reviews">Отзывы</a>
+      <a href="index.html#contact">Контакты</a>
+    </div>
+    <div class="nav__right">
+      <div class="nav__socials">
+        <a href="#" class="nav__social" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.2 4.4L2.4 11.4c-.5.2-.5.6 0 .8l4.6 1.7 1.8 5.6c.1.4.6.5.9.3l2.6-2.1 5 3.7c.4.3 1 .1 1.1-.4L22.2 5.2c.2-.6-.4-1.1-1-.8zM9.6 14.2l-.4 3.8 7.5-6.9-7.1 3.1z"/></svg></a>
+        <a href="#" class="nav__social" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
+        <a href="#" class="nav__social" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 21.5c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.6.9.9-3.5-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.5 6.7 2 12 2s9.8 4.5 9.8 10S17.3 22 12 22z"/></svg></a>
+      </div>
+      <button class="nav__theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <div class="nav__divider"></div>
+      <a href="tel:+79060311066" class="nav__phone-link">
+        <span class="nav__phone-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+        +7 (906) 031-10-66
+      </a>
+    </div>
+    <button class="nav__hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- PAGE -->
+  <main class="page">
+    <!-- Header -->
+    <div class="page-header">
+      <p class="page-header__label">Каталог</p>
+      <h1 class="page-header__title">Объекты недвижимости</h1>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <div class="filters__row">
+        <div class="filter-group">
+          <label class="filter-label">Тип недвижимости</label>
+          <select class="filter-select">
+            <option>Все</option>
+            <option>Квартиры</option>
+            <option>Дома</option>
+            <option>Коммерческая</option>
+            <option>Загородная</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Расположение</label>
+          <select class="filter-select">
+            <option>Район, округ, метро</option>
+            <option>Центральный</option>
+            <option>Ленинградский</option>
+            <option>Московский</option>
+            <option>Побережье</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Стоимость (млн. ₽)</label>
+          <div class="filter-range">
+            <input type="text" class="filter-input" placeholder="от 9.0">
+            <span class="filter-range__sep">—</span>
+            <input type="text" class="filter-input" placeholder="до 125.0">
+          </div>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Срок сдачи</label>
+          <div class="filter-range">
+            <select class="filter-select">
+              <option>Годы</option>
+              <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
+            </select>
+            <input type="text" class="filter-input" placeholder="2025">
+            <input type="text" class="filter-input" placeholder="2026">
+          </div>
+        </div>
+      </div>
+
+      <div class="filters__tags">
+        <button class="filter-tag">Загород</button>
+        <button class="filter-tag">Старт продаж</button>
+        <button class="filter-tag">С ключами</button>
+        <button class="filter-tag active">Premium дом</button>
+        <button class="filters__reset">Сбросить фильтры</button>
+      </div>
+    </div>
+
+    <!-- Objects List -->
+    <div class="objects-list" id="objectsList">
+      <!-- Rendered by JS -->
+    </div>
+  </main>
+
+  <script>
+    // Theme
+    (function() {
+      const saved = localStorage.getItem('phg-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        const hour = new Date().getHours();
+        document.documentElement.setAttribute('data-theme', hour >= 7 && hour < 19 ? 'light' : 'dark');
+      }
+    })();
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('phg-theme', next);
+    });
+
+    // Filter tags
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', () => tag.classList.toggle('active'));
+    });
+
+    // Objects data
+    const objects = [
+      {
+        name: 'Green Valley',
+        badge: 'Premium дом',
+        location: 'Подмосковье, Раменский район',
+        desc: 'Современные дома с энергоэффективными технологиями и уникальными природными пейзажами',
+        priceMain: 'от 15,8 млн. ₽',
+        configs: [
+          { type: '1-этажный дома', area: 'от 150 м²', price: 'от 15,8 млн. ₽' },
+          { type: '2-этажный дома', area: 'от 210 м²', price: 'от 21,5 млн. ₽' },
+          { type: 'Виллы', area: 'от 280 м²', price: 'от 32,0 млн. ₽' },
+        ],
+        meta: 'Старт продаж 02.10.2024',
+        photos: [
+          'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80',
+        ]
+      },
+      {
+        name: 'ЭкоПарк Жуковка',
+        badge: 'Premium дом',
+        location: 'Новая Москва, деревня Жуковка',
+        desc: 'Уникальный проект с эко домами в лесном массиве, вдали от городской суеты, но с быстрым доступом к столице',
+        priceMain: 'от 19,5 млн. ₽',
+        configs: [
+          { type: '1-этажный дома', area: 'от 170 м²', price: 'от 19,5 млн. ₽' },
+          { type: '2-этажный дома', area: 'от 240 м²', price: 'от 26,7 млн. ₽' },
+          { type: 'Пентхаусы', area: 'от 300 м²', price: 'от 38,0 млн. ₽' },
+        ],
+        meta: 'Срок сдачи: 2025',
+        photos: [
+          'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+          'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=80',
+          'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=400&q=80',
+        ]
+      },
+      {
+        name: 'Балтийская Ривьера',
+        badge: 'Побережье',
+        location: 'Калининградская область, Светлогорск',
+        desc: 'Элитный комплекс на первой линии Балтийского моря. Панорамное остекление, собственный пляж и яхт-клуб',
+        priceMain: 'от 28,0 млн. ₽',
+        configs: [
+          { type: 'Апартаменты', area: 'от 85 м²', price: 'от 28,0 млн. ₽' },
+          { type: 'Дуплексы', area: 'от 180 м²', price: 'от 45,0 млн. ₽' },
+          { type: 'Виллы у моря', area: 'от 320 м²', price: 'от 78,0 млн. ₽' },
+        ],
+        meta: 'Срок сдачи: Q3 2026',
+        photos: [
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=80',
+          'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=80',
+        ]
+      },
+      {
+        name: 'Резиденция Кёнигсберг',
+        badge: 'Старт продаж',
+        location: 'Калининград, остров Канта',
+        desc: 'Камерный клубный дом в историческом центре города. Авторская архитектура, подземный паркинг, консьерж',
+        priceMain: 'от 12,4 млн. ₽',
+        configs: [
+          { type: 'Студии', area: 'от 38 м²', price: 'от 12,4 млн. ₽' },
+          { type: '2-комнатные', area: 'от 72 м²', price: 'от 18,9 млн. ₽' },
+          { type: 'Пентхаусы', area: 'от 145 м²', price: 'от 42,0 млн. ₽' },
+        ],
+        meta: 'Старт продаж 15.03.2025',
+        photos: [
+          'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
+          'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80',
+          'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=400&q=80',
+        ]
+      }
+    ];
+
+    // Render
+    const list = document.getElementById('objectsList');
+    objects.forEach((obj, i) => {
+      const card = document.createElement('article');
+      card.className = 'object-card reveal';
+      card.style.transitionDelay = (i * 0.1) + 's';
+
+      const configRows = obj.configs.map(c =>
+        `<div class="obj__price-row">
+          <span class="obj__price-config">${c.type} <span>${c.area}</span></span>
+          <span class="obj__price-val">${c.price}</span>
+        </div>`
+      ).join('');
+
+      const photoCards = obj.photos.map((src, pi) =>
+        `<div class="obj__photo"><img src="${src}" alt="${obj.name}" loading="lazy"></div>`
+      ).join('');
+
+      card.innerHTML = `
+        <div class="obj__info">
+          <div class="obj__header">
+            <h2 class="obj__name">${obj.name}</h2>
+            <span class="obj__badge">${obj.badge}</span>
+          </div>
+          <p class="obj__location">${obj.location}</p>
+          <p class="obj__desc">${obj.desc}</p>
+          <p class="obj__price-main">${obj.priceMain}</p>
+          <div class="obj__price-table">${configRows}</div>
+          <p class="obj__meta">${obj.meta}</p>
+        </div>
+        <div class="obj__photos">${photoCards}</div>
+      `;
+      list.appendChild(card);
+    });
+
+    // Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
