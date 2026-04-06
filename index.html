@@ -1055,12 +1055,11 @@
     }
 
     .cat-card__label {
-      font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-gold);
     }
 
     .cat-card__title {
@@ -1480,7 +1479,9 @@
     }
 
     .why__block--left .why__block-title {
-      color: var(--text-muted);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 400;
     }
 
     .why__block--right .why__block-title {
@@ -2629,7 +2630,7 @@
       <article class="cat-card reveal">
         <div class="cat-card__text">
           <span class="cat-card__line"></span>
-          <span class="cat-card__label">Город</span>
+          <span class="cat-card__label"></span>
           <h3 class="cat-card__title">Квартиры</h3>
           <span class="cat-card__count">24 объекта</span>
         </div>
@@ -2640,7 +2641,7 @@
       <article class="cat-card reveal">
         <div class="cat-card__text">
           <span class="cat-card__line"></span>
-          <span class="cat-card__label">Море</span>
+          <span class="cat-card__label"></span>
           <h3 class="cat-card__title">Побережье</h3>
           <span class="cat-card__count">12 объектов</span>
         </div>
@@ -2651,7 +2652,7 @@
       <article class="cat-card reveal">
         <div class="cat-card__text">
           <span class="cat-card__line"></span>
-          <span class="cat-card__label">Бизнес</span>
+          <span class="cat-card__label"></span>
           <h3 class="cat-card__title">Коммерческая</h3>
           <span class="cat-card__count">8 объектов</span>
         </div>
@@ -2662,7 +2663,7 @@
       <article class="cat-card reveal">
         <div class="cat-card__text">
           <span class="cat-card__line"></span>
-          <span class="cat-card__label">Природа</span>
+          <span class="cat-card__label"></span>
           <h3 class="cat-card__title">Загородная</h3>
           <span class="cat-card__count">16 объектов</span>
         </div>
@@ -2677,7 +2678,7 @@
   <section class="section-team" id="team">
     <div class="team__header">
       <p class="team__label">Наша команда</p>
-      <h2 class="team__section-title">Специалисты агентства</h2>
+      <h2 class="team__section-title">Эксперты по недвижимости</h2>
     </div>
     <div class="team__layout">
       <!-- Left — main photo -->
@@ -2791,7 +2792,7 @@
     <div class="quiz-cta__left">
       <div class="quiz-cta__content reveal">
         <p class="quiz-cta__label">Подберём дом вашей мечты</p>
-        <h2 class="quiz-cta__title">Пройдите квиз и мы найдём идеальный объект за 48 часов</h2>
+        <h2 class="quiz-cta__title">Не уверены в выборе?</h2>
         <p class="quiz-cta__sub">Ответьте на 5 вопросов — и получите персональную подборку объектов с инвестиционным расчётом</p>
         <div class="quiz-cta__divider"></div>
         <button class="quiz-cta__btn">Начать подбор</button>
@@ -2884,20 +2885,6 @@
         <div class="form-field">
           <label class="form-label">Телефон</label>
           <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__">
-        </div>
-        <div class="form-field">
-          <label class="form-label">Тип объекта</label>
-          <select class="form-select">
-            <option value="" disabled selected>Выберите тип</option>
-            <option>Квартира</option>
-            <option>Дом</option>
-            <option>Коммерческая</option>
-            <option>Загородная</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Бюджет</label>
-          <input type="text" class="form-input" placeholder="Укажите бюджет">
         </div>
         <button type="submit" class="form-submit">
           <span class="submit-circle">
