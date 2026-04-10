@@ -703,7 +703,8 @@
       right: 0;
       bottom: 0;
       z-index: 201;
-      width: 520px;
+      width: 30vw;
+      min-width: 480px;
       max-width: 100vw;
       background: #0A0A0A;
       transform: translateX(100%);
@@ -757,41 +758,41 @@
 
     .form-panel__tag {
       font-family: var(--font-body);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 300;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.35);
-      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 24px;
     }
 
     .form-panel__title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(28px, 4vw, 42px);
+      font-size: clamp(38px, 3.8vw, 56px);
       color: #F0EDE8;
-      line-height: 1.15;
-      margin-bottom: 32px;
+      line-height: 1.1;
+      margin-bottom: 40px;
     }
 
     /* Features grid */
     .form-panel__features {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 36px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 24px 0;
+      margin-bottom: 40px;
     }
 
     .form-panel__feature {
-      padding: 16px 12px 16px 0;
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 300;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.75);
       line-height: 1.5;
     }
 
@@ -805,12 +806,12 @@
     .form-panel__label {
       display: block;
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 300;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.35);
-      padding-top: 20px;
+      color: rgba(255, 255, 255, 0.55);
+      padding-top: 22px;
     }
 
     .form-panel__input {
@@ -820,10 +821,10 @@
       border: none;
       outline: none;
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 300;
       color: #F0EDE8;
-      padding: 10px 0 16px;
+      padding: 12px 0 18px;
     }
 
     .form-panel__input::placeholder {
@@ -842,10 +843,10 @@
       border: none;
       outline: none;
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 300;
       color: #F0EDE8;
-      padding: 10px 0 16px;
+      padding: 12px 0 18px;
       cursor: pointer;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -879,14 +880,14 @@
     /* Bonus text */
     .form-panel__bonus {
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 300;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.5);
       line-height: 1.6;
-      margin-top: 28px;
-      margin-bottom: 16px;
+      margin-top: 32px;
+      margin-bottom: 20px;
     }
 
     /* Submit row */
@@ -898,14 +899,14 @@
     .form-panel__submit {
       flex: 1;
       font-family: var(--font-body);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 300;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #F0EDE8;
       background: rgba(131, 130, 95, 1);
       border: none;
-      padding: 18px 24px;
+      padding: 20px 24px;
       cursor: pointer;
       transition: background 0.3s;
     }
@@ -944,6 +945,7 @@
     @media (max-width: 768px) {
       .form-panel {
         width: 100vw;
+        min-width: 0;
       }
 
       .form-panel__inner {
@@ -952,6 +954,10 @@
 
       .form-panel__features {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .form-panel__title {
+        font-size: clamp(28px, 7vw, 38px);
       }
     }
 
