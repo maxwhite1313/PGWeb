@@ -638,9 +638,10 @@
 
     /* Right bottom — CTA button */
     .hero__cta-btn {
-      position: absolute;
-      bottom: 0;
-      right: 0;
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 150;
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -654,14 +655,16 @@
       padding: 16px 32px;
       border: none;
       cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       opacity: 0;
-      animation: slideInRight 0.9s var(--ease-out) 1.0s forwards;
+      animation: fadeIn 0.9s var(--ease-out) 1s forwards;
     }
 
     .hero__cta-btn:hover {
       background: rgba(110, 109, 78, 1);
       transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
     }
 
     .hero__cta-btn svg {
@@ -999,10 +1002,11 @@
       }
 
       .hero__cta-btn {
-        position: relative;
-        margin-top: 20px;
-        opacity: 1;
-        animation: none;
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        justify-content: center;
+        padding: 14px 24px;
       }
 
       .hero__scroll {
