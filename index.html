@@ -2142,6 +2142,293 @@
       }
     }
 
+    /* ===== QUIZ OVERLAY ===== */
+    .quiz-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: #F5F3EF;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s;
+      display: grid;
+      grid-template-columns: 1fr 42%;
+    }
+
+    .quiz-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .quiz-overlay__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .quiz-overlay__right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-overlay__right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .quiz-overlay__close {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 1px solid rgba(26, 26, 24, 0.15);
+      border-radius: 50%;
+      cursor: pointer;
+      color: #5A5850;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      z-index: 10;
+    }
+
+    .quiz-overlay__close:hover {
+      color: #1A1A18;
+      border-color: rgba(26, 26, 24, 0.3);
+      background: rgba(26, 26, 24, 0.04);
+    }
+
+    .quiz-overlay__close svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Steps */
+    .quiz-step {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .quiz-step.active {
+      display: flex;
+    }
+
+    .quiz-step__title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(24px, 2.8vw, 36px);
+      line-height: 1.2;
+      color: #1A1A18;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+
+    .quiz-step__sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #8A8780;
+      margin-bottom: 32px;
+    }
+
+    /* Radio / Checkbox options */
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 40px;
+      margin-bottom: 48px;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      color: #1A1A18;
+      line-height: 1.4;
+    }
+
+    .quiz-option input {
+      display: none;
+    }
+
+    .quiz-option__mark {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #8A8780;
+      margin-top: 1px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+
+    .quiz-option input:checked + .quiz-option__mark {
+      border-color: var(--accent-gold);
+    }
+
+    .quiz-option input:checked + .quiz-option__mark::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+    }
+
+    /* Checkbox variant */
+    .quiz-option--check .quiz-option__mark {
+      border-radius: 4px;
+    }
+
+    .quiz-option--check input:checked + .quiz-option__mark {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    .quiz-option--check input:checked + .quiz-option__mark::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 0;
+      background: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: contain;
+    }
+
+    /* Navigation */
+    .quiz-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .quiz-nav__btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-nav__btn--back {
+      background: none;
+      border: 1.5px solid #1A1A18;
+      color: #1A1A18;
+    }
+
+    .quiz-nav__btn--back:hover {
+      background: rgba(26, 26, 24, 0.06);
+    }
+
+    .quiz-nav__btn--next {
+      background: var(--accent-gold);
+      border: 1.5px solid var(--accent-gold);
+      color: #fff;
+    }
+
+    .quiz-nav__btn--next:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .quiz-progress {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 13px;
+      color: #8A8780;
+      margin-top: 32px;
+    }
+
+    /* Final step — messengers */
+    .quiz-messengers {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .quiz-messenger {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+    }
+
+    .quiz-messenger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .quiz-messenger--tg {
+      background: #2AABEE;
+    }
+
+    .quiz-messenger--wa {
+      background: #25D366;
+    }
+
+    .quiz-messenger--viber {
+      background: #7360F2;
+    }
+
+    .quiz-messenger svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-overlay {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-overlay__right {
+        display: none;
+      }
+
+      .quiz-overlay__left {
+        padding: 80px 24px 40px;
+      }
+
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ===== BLOCK 8 — REVIEWS ===== */
     .section-reviews {
       background: var(--bg-secondary);
@@ -3059,6 +3346,121 @@
   </section>
 
   <!-- Slide-in form panel -->
+  <!-- QUIZ OVERLAY -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-overlay__left">
+      <button class="quiz-overlay__close" id="quizClose">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <!-- Step 1 -->
+      <div class="quiz-step active" data-step="1">
+        <h2 class="quiz-step__title">В каком районе, области<br>планируете купить?</h2>
+        <div class="quiz-options">
+          <label class="quiz-option">
+            <input type="radio" name="quiz-location" value="kaliningrad">
+            <span class="quiz-option__mark"></span>
+            <span>Только Калининград или пригород</span>
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="quiz-location" value="any">
+            <span class="quiz-option__mark"></span>
+            <span>Не имеет значения</span>
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="quiz-location" value="sea">
+            <span class="quiz-option__mark"></span>
+            <span>Около моря</span>
+          </label>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-nav__btn quiz-nav__btn--back" data-dir="prev">НАЗАД</button>
+          <button class="quiz-nav__btn quiz-nav__btn--next" data-dir="next">ДАЛЕЕ</button>
+        </div>
+        <p class="quiz-progress">1/3</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="quiz-step" data-step="2">
+        <h2 class="quiz-step__title">Какой срок сдачи<br>для вас приемлем?</h2>
+        <p class="quiz-step__sub">Сейчас, в феврале 2026 г. есть хорошие скидки на жильё в сданных домах</p>
+        <div class="quiz-options">
+          <label class="quiz-option">
+            <input type="radio" name="quiz-deadline" value="2026">
+            <span class="quiz-option__mark"></span>
+            <span>В 2026 году</span>
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="quiz-deadline" value="2028+">
+            <span class="quiz-option__mark"></span>
+            <span>В 2028 году и позже</span>
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="quiz-deadline" value="2027">
+            <span class="quiz-option__mark"></span>
+            <span>В 2027 году</span>
+          </label>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-nav__btn quiz-nav__btn--back" data-dir="prev">НАЗАД</button>
+          <button class="quiz-nav__btn quiz-nav__btn--next" data-dir="next">ДАЛЕЕ</button>
+        </div>
+        <p class="quiz-progress">2/3</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="quiz-step" data-step="3">
+        <h2 class="quiz-step__title">Какой тип нового<br>жилья вас интересует?</h2>
+        <p class="quiz-step__sub">Последний вопрос и я приступаю к формированию подборки для вас.</p>
+        <div class="quiz-options">
+          <label class="quiz-option quiz-option--check">
+            <input type="checkbox" name="quiz-type" value="apartment">
+            <span class="quiz-option__mark"></span>
+            <span>Квартира</span>
+          </label>
+          <label class="quiz-option quiz-option--check">
+            <input type="checkbox" name="quiz-type" value="apart">
+            <span class="quiz-option__mark"></span>
+            <span>Апартаменты</span>
+          </label>
+          <label class="quiz-option quiz-option--check">
+            <input type="checkbox" name="quiz-type" value="house">
+            <span class="quiz-option__mark"></span>
+            <span>Частный дом</span>
+          </label>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-nav__btn quiz-nav__btn--back" data-dir="prev">НАЗАД</button>
+          <button class="quiz-nav__btn quiz-nav__btn--next" data-dir="next">ДАЛЕЕ</button>
+        </div>
+        <p class="quiz-progress">3/3</p>
+      </div>
+
+      <!-- Step 4 — Result -->
+      <div class="quiz-step" data-step="4">
+        <h2 class="quiz-step__title">Я уже формирую<br>подборку для вас</h2>
+        <p class="quiz-step__sub">Выберите пожалуйста, куда я могу вам ее направить?</p>
+        <div class="quiz-messengers">
+          <a href="https://t.me/" target="_blank" class="quiz-messenger quiz-messenger--tg" title="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          </a>
+          <a href="https://wa.me/" target="_blank" class="quiz-messenger quiz-messenger--wa" title="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="viber://chat" target="_blank" class="quiz-messenger quiz-messenger--viber" title="Viber">
+            <svg viewBox="0 0 24 24"><path d="M11.4 0C9.473.028 5.333.344 3.02 2.467 1.302 4.187.6 6.783.528 9.967c-.072 3.184-.168 9.152 5.6 10.8h.004l-.004 2.472s-.036.996.624 1.2c.792.24 1.26-.516 2.016-1.332.42-.456.996-1.128 1.428-1.644 3.936.336 6.96-.432 7.308-.54.804-.252 5.352-.84 6.096-6.888.768-6.24-.372-10.176-2.46-11.952C19.26.48 14.456-.048 11.4 0zm.6 2.16c2.688.012 6.708.384 8.4 1.848 1.608 1.404 2.64 4.932 1.98 10.14-.6 4.848-4.08 5.352-4.764 5.568-.288.096-2.916.744-6.24.528 0 0-2.472 2.988-3.24 3.756-.12.132-.264.18-.36.156-.132-.036-.168-.192-.168-.42l.024-4.08c-4.8-1.356-4.512-6.3-4.452-8.928.06-2.628.612-4.8 2.016-6.18 1.476-1.404 5.052-1.8 6.804-1.848zM11.16 4.8a.36.36 0 00-.372.36.36.36 0 00.36.372c1.392.012 2.544.48 3.456 1.392.888.888 1.368 2.112 1.392 3.504a.36.36 0 00.372.348h.012a.36.36 0 00.348-.384c-.024-1.584-.588-2.988-1.608-4.008C14.1 5.388 12.744 4.812 11.16 4.8zm-2.352.588a.76.76 0 00-.54.168l-.444.36-.024.024c-.36.312-.6.648-.72 1.02-.108.324-.108.66.012 1.008l.012.024c.42 1.104.972 2.148 1.668 3.12.672.96 1.5 1.86 2.46 2.7l.036.024.024.036.036.024.024.036c.84.96 1.74 1.788 2.7 2.46.972.696 2.016 1.248 3.12 1.668l.024.012c.348.12.684.12 1.008.012.372-.12.708-.36 1.02-.72l.024-.024c.288-.36.384-.72.3-1.068-.084-.36-.324-.636-.66-.876l-1.332-.936a1.147 1.147 0 00-1.356.06l-.42.348c-.18.144-.42.12-.42.12l-.012.012c-2.16-.528-3.468-1.848-3.468-1.848s-.024-.24.12-.42l.348-.42c.216-.384.24-.864.048-1.356l-.936-1.332c-.24-.336-.516-.576-.876-.66a1.013 1.013 0 00-.468.012.848.848 0 00-.132.048zm3.216.648a.36.36 0 00-.072.708c.96.192 1.704.636 2.268 1.344.552.672.864 1.5.924 2.46a.366.366 0 00.384.336.36.36 0 00.336-.384c-.072-1.128-.444-2.1-1.092-2.88-.66-.804-1.56-1.332-2.676-1.56a.36.36 0 00-.072-.024zm.168 2.16a.36.36 0 00-.348.372.36.36 0 00.372.348c.468.012.816.156 1.068.432.264.288.396.684.408 1.152a.36.36 0 00.372.348.36.36 0 00.348-.384c-.012-.648-.216-1.2-.6-1.608-.384-.42-.936-.648-1.596-.66a.36.36 0 00-.024 0z"/></svg>
+          </a>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-nav__btn quiz-nav__btn--back" data-dir="prev">НАЗАД</button>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-overlay__right">
+      <img src="IMG_4685.jpg" alt="Современная архитектура">
+    </div>
+  </div>
+
   <div class="form-panel-overlay" id="formPanelOverlay"></div>
   <div class="form-panel" id="formPanel">
     <div class="form-panel__inner">
@@ -3782,6 +4184,55 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && formPanel.classList.contains('active')) {
         closeForm();
+      }
+    });
+
+    // ===== QUIZ OVERLAY =====
+    const quizOverlay = document.getElementById('quizOverlay');
+    const quizCloseBtn = document.getElementById('quizClose');
+    const quizSteps = quizOverlay.querySelectorAll('.quiz-step');
+    const quizStartBtn = document.querySelector('.quiz-cta__btn');
+    let currentStep = 1;
+
+    function showQuizStep(n) {
+      quizSteps.forEach(s => s.classList.remove('active'));
+      const target = quizOverlay.querySelector('[data-step="' + n + '"]');
+      if (target) target.classList.add('active');
+      currentStep = n;
+    }
+
+    function openQuiz() {
+      showQuizStep(1);
+      quizOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuiz() {
+      quizOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    quizStartBtn.addEventListener('click', openQuiz);
+    quizCloseBtn.addEventListener('click', closeQuiz);
+
+    quizOverlay.querySelectorAll('.quiz-nav__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dir = btn.dataset.dir;
+        if (dir === 'next' && currentStep < 4) {
+          showQuizStep(currentStep + 1);
+        } else if (dir === 'prev') {
+          if (currentStep > 1) {
+            showQuizStep(currentStep - 1);
+          } else {
+            closeQuiz();
+          }
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && quizOverlay.classList.contains('active')) {
+        closeQuiz();
       }
     });
 
